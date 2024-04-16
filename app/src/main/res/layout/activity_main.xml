@@ -7,12 +7,93 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sportsapp Test"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/sportsAppDisplayTextView"
+        android:layout_width="390dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dip"
+        android:padding="8dp"
+        android:text="@string/sportsapp_test"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/favLeagueLabelTextView"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/favoirte_league"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sportsAppDisplayTextView" />
+
+    <EditText
+        android:id="@+id/favLeagueInputEditText"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_a_league"
+        android:inputType="textAutoComplete"
+        android:padding="4dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/favLeagueLabelTextView"
+        app:layout_constraintStart_toEndOf="@id/favLeagueLabelTextView" />
+
+    <TextView
+        android:id="@+id/testIntegerLabelTextView"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/enter_integer"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favLeagueLabelTextView" />
+
+    <EditText
+        android:id="@+id/integerInput_EditText"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_an_integer_text"
+        android:inputType="textAutoComplete"
+        android:padding="4dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/testIntegerLabelTextView"
+        app:layout_constraintStart_toEndOf="@id/testIntegerLabelTextView"
+        tools:ignore="DuplicateIds" />
+
+    <TextView
+        android:id="@+id/testDoubleLabelTextView"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/enter_integer"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/testIntegerLabelTextView" />
+
+    <EditText
+        android:id="@+id/doubleInputEditText"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_an_integer"
+        android:inputType="textAutoComplete"
+        android:padding="4dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/testDoubleLabelTextView"
+        app:layout_constraintStart_toEndOf="@id/testDoubleLabelTextView" />
+
+    <Button
+        android:layout_width="390dp"
+        android:layout_height="205dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/doubleInputEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/submit"
+        android:textSize="36sp"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SportsApp</string>
+    <string name="favoirte_league">Favoirte League</string>
+    <string name="enter_a_league">Enter a League</string>
+    <string name="enter_integer">Enter Integer</string>
+    <string name="enter_an_integer">Enter an Integer</string>
+    <string name="enter_an_integer_text">Enter an Integer</string>
+    <string name="enter_a_decimal">Enter a decimal</string>
+    <string name="sportsapp_test">Sportsapp Test</string>
+    <string name="submit">Submit</string>
 </resources>
