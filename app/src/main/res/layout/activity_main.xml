@@ -93,6 +93,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/submit"
         android:textSize="36sp"
+        android:id="@+id/logButton"
         />
 
 
