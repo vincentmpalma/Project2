@@ -1,11 +1,11 @@
-package com.example.sportsapp.Database.entities;
+package com.example.sportsapp.database.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.sportsapp.Database.SportsAppDatabase;
+import com.example.sportsapp.database.SportsAppDatabase;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity(tableName = SportsAppDatabase.SPORTS_APP_TABLE) //entity means this POJO will be stored in the database
@@ -16,13 +16,24 @@ public class SportsApp {
     private String favLeague;
     private double firstNum;
     private int secondNum;
-    private LocalDate date;
+    private LocalDateTime date;
 
     public SportsApp(String favLeague, double firstNum, int secondNum) {
         this.favLeague = favLeague;
         this.firstNum = firstNum;
         this.secondNum = secondNum;
-        date = LocalDate.now();
+        date = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "SportsApp{" +
+                "id=" + id +
+                ", favLeague='" + favLeague + '\'' +
+                ", firstNum=" + firstNum +
+                ", secondNum=" + secondNum +
+                ", date=" + date +
+                '}';
     }
 
     @Override
@@ -70,11 +81,11 @@ public class SportsApp {
         this.secondNum = secondNum;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

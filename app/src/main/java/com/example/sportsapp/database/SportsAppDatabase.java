@@ -1,4 +1,4 @@
-package com.example.sportsapp.Database;
+package com.example.sportsapp.database;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,15 +7,18 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.sportsapp.Database.entities.SportsApp;
+import com.example.sportsapp.database.entities.SportsApp;
 import com.example.sportsapp.MainActivity;
+import com.example.sportsapp.database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 //this class represents actual database, where our information is stored
+@TypeConverters(LocalDateTypeConverter.class)
 @Database(entities = {SportsApp.class}, version = 1, exportSchema = false)
 public abstract class SportsAppDatabase extends RoomDatabase {
 
