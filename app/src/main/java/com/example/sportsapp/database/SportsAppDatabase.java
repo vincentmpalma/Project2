@@ -16,6 +16,7 @@ import com.example.sportsapp.database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+//test commit
 
 //this class represents actual database, where our information is stored
 @TypeConverters(LocalDateTypeConverter.class)
