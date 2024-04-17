@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    private static final String TAG = "DAC_SPORTS_APP";
+    public static final String TAG = "DAC_SPORTS_APP";
 
     String mLeague = "";
     double mFirstInt = 0.0;
