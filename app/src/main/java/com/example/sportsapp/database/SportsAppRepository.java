@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.sportsapp.database.entities.SportsApp;
 import com.example.sportsapp.MainActivity;
+import com.example.sportsapp.database.entities.User;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -12,7 +13,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class SportsAppRepository {
-    private SportsAppDAO sportsAppDAO;
+    private final SportsAppDAO sportsAppDAO;
+    private final UserDAO userDAO;
     private ArrayList<SportsApp> allLogs;
 
     private static SportsAppRepository repository;
@@ -20,6 +22,7 @@ public class SportsAppRepository {
     private SportsAppRepository(Application application){
         SportsAppDatabase db = SportsAppDatabase.getDatabase(application);
         this.sportsAppDAO = db.sportsAppDAO();
+        this.userDAO = db.userDAO();
         this.allLogs = (ArrayList<SportsApp>) this.sportsAppDAO.getAllRecords();
     }
 
@@ -67,6 +70,13 @@ public class SportsAppRepository {
         SportsAppDatabase.databaseWriteExecutor.execute(()->
         {
             sportsAppDAO.insert(sportsApp);
+        });
+    }
+
+    public void insertUser(User... user){
+        SportsAppDatabase.databaseWriteExecutor.execute(()->
+        {
+            userDAO.insert(user);
         });
     }
 

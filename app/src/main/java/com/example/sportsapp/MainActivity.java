@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     double mFirstInt = 0.0;
     int mSecondInt = 0;
 
+
+    //TODO: add login information
+    int loggedInUserId = -1; //default user
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +50,25 @@ public class MainActivity extends AppCompatActivity {
                 updateDisplay(); //updates the display
             }
         });
+
+
+        //dont know why he did this, can prob just comment it out
+        binding.favLeagueInputEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateDisplay();
+            }
+        });
+
     }
+
 
     private void insertSportsAppRecord() {
         if (mLeague.isEmpty()) {
             return;
         }
 
-        SportsApp app = new SportsApp(mLeague, mFirstInt, mSecondInt); //,make a new POJO
+        SportsApp app = new SportsApp(mLeague, mFirstInt, mSecondInt, loggedInUserId); //,make a new POJO
         repository.insertSportsApp(app); //inserting pojo we just created into the database through the repo
     }
 
