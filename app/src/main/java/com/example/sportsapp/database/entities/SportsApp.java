@@ -1,5 +1,6 @@
 package com.example.sportsapp.database.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -25,15 +26,14 @@ public class SportsApp {
         date = LocalDateTime.now();
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "SportsApp{" +
-                "id=" + id +
-                ", favLeague='" + favLeague + '\'' +
-                ", firstNum=" + firstNum +
-                ", secondNum=" + secondNum +
-                ", date=" + date +
-                '}';
+        return  favLeague + '\n' +
+                "First Number Entered = " + firstNum + '\n' +
+                "Second Number Entered = " + secondNum + '\n' +
+                "Date = " + date.toString() + '\n' +
+                "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
     }
 
     @Override
