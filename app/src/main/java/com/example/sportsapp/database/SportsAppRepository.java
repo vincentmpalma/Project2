@@ -91,4 +91,21 @@ public class SportsAppRepository {
         return userDAO.getUserByUserId(userId);
     }
 
+    public ArrayList<SportsApp> getAllLogsByUserId(int loggedInUserId) {
+        //Future of an ArrayList of SportsApp (2ill have future values)
+        Future<ArrayList<SportsApp>> future = SportsAppDatabase.databaseWriteExecutor.submit( //submitting task to thread in SportsAppDatabase
+                new Callable<ArrayList<SportsApp>>() { //information done here will go back to future ^
+                    @Override
+                    public ArrayList<SportsApp> call() throws Exception { //anon inner class of Callable interface, method called "call"
+                        return (ArrayList<SportsApp>) sportsAppDAO.getRecordsetUserId(loggedInUserId);
+                    }
+                }
+        );
+        try{
+            return future.get();
+        } catch(InterruptedException | ExecutionException e){
+            Log.i(MainActivity.TAG, "Problem when getting all SportsApps in the repository");
+        }
+        return null;
+    }
 }

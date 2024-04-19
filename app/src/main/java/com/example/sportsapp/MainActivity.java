@@ -30,12 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.sportsapp.MAIN_ACTIVITY_USER_ID";
     static final String SHARED_PREFERENCE_USERID_KEY = "com.example.sportsapp.SHARED_PREFERENCE_USERID_KEY";
+    static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.sportsapp.SAVED_INSTANCE_STATE_USERID_KEY";
     static final String SHARED_PREFERENCE_USERID_VALUE = "com.example.sportsapp.SHARED_PREFERENCE_USERID_VALUE";
     private static final int LOGGED_OUT = -1;
     private ActivityMainBinding binding;
-
     private SportsAppRepository repository;
-
     public static final String TAG = "DAC_SPORTS_APP";
 
     String mLeague = "";
@@ -52,17 +51,15 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loginUser(); //make sure user is logged in and we have user object
+        repository = SportsAppRepository.getRepository(getApplication());
+        loginUser(savedInstanceState); //make sure user is logged in and we have user object
+
         if (loggedInUserId == -1) {
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext()); //getting login intent
             startActivity(intent); //starting login view
         }
 
-
-        repository = SportsAppRepository.getRepository(getApplication());
-
         binding.sportsAppDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
-
         updateDisplay();
         binding.logButton.setOnClickListener(new View.OnClickListener() { //making on click listener for Submit button
             @Override
@@ -84,15 +81,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void loginUser() {
+    private void loginUser(Bundle savedInstanceState) {
         //checked shared preference for logged in user
-        SharedPreferences sharedPreferences = getApplication().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
-        loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
-        if (loggedInUserId != LOGGED_OUT) {
-            return;
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+
+        if(sharedPreferences.contains(SHARED_PREFERENCE_USERID_VALUE)){
+            loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
         }
-        //check intent for logged in user
-        loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, LOGGED_OUT);
+
+        if(loggedInUserId == LOGGED_OUT & savedInstanceState != null && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_USERID_KEY)){
+            loggedInUserId = savedInstanceState.getInt(SAVED_INSTANCE_STATE_USERID_KEY, LOGGED_OUT);
+        }
+
+        if(loggedInUserId == LOGGED_OUT){
+            loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, LOGGED_OUT);
+        }
 
         if(loggedInUserId == LOGGED_OUT){
             return;
@@ -100,11 +103,25 @@ public class MainActivity extends AppCompatActivity {
 
         LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId); //live data
         userObserver.observe(this, user -> { //unpack the live data
+            this.user = user;
             if (user != null) {
                 invalidateOptionsMenu();
+            } else {
+                //TODO: verify if this was an issue
+                logout();
             }
         });
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SAVED_INSTANCE_STATE_USERID_KEY,loggedInUserId);
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(MainActivity.SHARED_PREFERENCE_USERID_KEY, loggedInUserId);
+        sharedPrefEditor.apply();
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -182,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateDisplay() {
-        ArrayList<SportsApp> allLogs = repository.getAllLogs();
+        ArrayList<SportsApp> allLogs = repository.getAllLogsByUserId(loggedInUserId);
         if (allLogs.isEmpty()) {
             binding.sportsAppDisplayTextView.setText(R.string.nothing_to_show);
         } else {

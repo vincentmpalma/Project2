@@ -7,7 +7,6 @@ import androidx.room.Query;
 
 import com.example.sportsapp.database.entities.SportsApp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //this interface represents the queries that are ran in the database, (remember this is an interface!)
@@ -18,4 +17,7 @@ public interface SportsAppDAO {
 
     @Query("SELECT * FROM " + SportsAppDatabase.SPORTS_APP_TABLE + " ORDER BY date DESC")
     List<SportsApp> getAllRecords();
+
+    @Query("SELECT * FROM " + SportsAppDatabase.SPORTS_APP_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
+    List<SportsApp> getRecordsetUserId(int loggedInUserId);
 }
