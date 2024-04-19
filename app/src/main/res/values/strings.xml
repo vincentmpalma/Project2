@@ -9,4 +9,8 @@
     <string name="sportsapp_test">Sportsapp Test</string>
     <string name="submit">Submit</string>
     <string name="nothing_to_show">Nothing to show.</string>
+    <string name="login_welcome">Welcome to SportsApp\nPlease sign in.</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 </resources>
