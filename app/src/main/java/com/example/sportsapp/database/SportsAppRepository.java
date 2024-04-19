@@ -81,4 +81,19 @@ public class SportsAppRepository {
     }
 
 
+    public User getUserByUserName(String username) {
+        Future<User> future = SportsAppDatabase.databaseWriteExecutor.submit(
+                new Callable<User>() {
+                    @Override
+                    public User call() throws Exception {
+                        return userDAO.getUserByUserName(username);
+                    }
+                });
+        try{
+            future.get();
+        } catch(InterruptedException | ExecutionException e){
+            Log.i(MainActivity.TAG, "Problem when getting all user by username");
+        }
+        return null;
+    }
 }
