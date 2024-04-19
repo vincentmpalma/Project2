@@ -3,6 +3,8 @@ package com.example.sportsapp.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.sportsapp.database.entities.SportsApp;
 import com.example.sportsapp.MainActivity;
 import com.example.sportsapp.database.entities.User;
@@ -81,19 +83,12 @@ public class SportsAppRepository {
     }
 
 
-    public User getUserByUserName(String username) {
-        Future<User> future = SportsAppDatabase.databaseWriteExecutor.submit(
-                new Callable<User>() {
-                    @Override
-                    public User call() throws Exception {
-                        return userDAO.getUserByUserName(username);
-                    }
-                });
-        try{
-            future.get();
-        } catch(InterruptedException | ExecutionException e){
-            Log.i(MainActivity.TAG, "Problem when getting all user by username");
-        }
-        return null;
+    public LiveData<User> getUserByUserName(String username) {
+        return userDAO.getUserByUserName(username);
     }
+
+    public LiveData<User> getUserByUserId(int userId) {
+        return userDAO.getUserByUserId(userId);
+    }
+
 }
