@@ -77,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.adminPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AdminActivity.adminPageIntentFactory(getApplicationContext(), loggedInUserId);
+                startActivity(intent);
+            }
+        });
+
 
         //dont know why he did this, can prob just comment it out
         binding.favLeagueInputEditText.setOnClickListener(new View.OnClickListener() {

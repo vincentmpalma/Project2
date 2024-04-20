@@ -19,4 +19,7 @@
     <string name="register">Register</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="admin_page">Admin Page</string>
+    <string name="add_user">Add User</string>
+    <string name="users_info">Users Info</string>
+    <string name="delete_user">Delete User</string>
 </resources>
