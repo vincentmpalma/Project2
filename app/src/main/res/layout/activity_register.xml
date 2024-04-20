@@ -5,16 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/titleLoginTextView"
+        android:id="@+id/titleRegisterTextView"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="16dip"
         android:layout_marginBottom="24dip"
         android:gravity="center"
-        android:text="@string/login_welcome"
+        android:text="@string/register"
         android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleLoginTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/titleRegisterTextView" />
 
     <EditText
         android:id="@+id/passwordLoginEditText"
@@ -48,18 +48,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameLoginEditText" />
 
-
-    <Button
-        android:id="@+id/loginButton"
+    <EditText
+        android:id="@+id/confirmPasswordLoginEditText"
         android:layout_width="match_parent"
-        android:layout_height="105dp"
+        android:layout_height="75dp"
         android:layout_margin="16dp"
-        android:text="@string/login"
-        android:textSize="32sp"
+        android:autofillHints="Please enter password"
+        android:gravity="center"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordLoginEditText" />
-
+        app:layout_constraintTop_toBottomOf="@+id/passwordLoginEditText" />
 
     <Button
         android:id="@+id/registerButton"
@@ -70,8 +71,6 @@
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/confirmPasswordLoginEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

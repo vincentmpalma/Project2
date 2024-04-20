@@ -15,4 +15,7 @@
     <string name="login">Login</string>
     <string name="preference_file_key">daclinkPreferenceFileNameSportsapp</string>
     <string name="preference_user_Id_key">daclinkPreferenceUserIdKeysportsApp</string>
+    <string name="don_t_have_an_account_click_here_to_register">Don\'t have an Account?</string>
+    <string name="register">Register</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
