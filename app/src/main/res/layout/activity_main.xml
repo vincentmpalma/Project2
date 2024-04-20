@@ -96,5 +96,17 @@
         android:id="@+id/logButton"
         />
 
+    <Button
+        android:layout_width="390dp"
+        android:layout_height="125dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/admin_page"
+        android:textSize="36sp"
+        android:id="@+id/adminPage"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

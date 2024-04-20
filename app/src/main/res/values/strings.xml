@@ -18,4 +18,5 @@
     <string name="don_t_have_an_account_click_here_to_register">Don\'t have an Account?</string>
     <string name="register">Register</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="admin_page">Admin Page</string>
 </resources>

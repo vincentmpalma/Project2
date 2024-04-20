@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
         binding.sportsAppDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
         updateDisplay();
+
+
+
         binding.logButton.setOnClickListener(new View.OnClickListener() { //making on click listener for Submit button
             @Override
             public void onClick(View v) {
@@ -110,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
             this.user = user;
             if (user != null) {
                 invalidateOptionsMenu();
+                if(!user.isAdmin()){
+                    binding.adminPage.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }
