@@ -10,6 +10,7 @@ import com.example.sportsapp.MainActivity;
 import com.example.sportsapp.database.entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -89,6 +90,10 @@ public class SportsAppRepository {
 
     public LiveData<User> getUserByUserId(int userId) {
         return userDAO.getUserByUserId(userId);
+    }
+
+    public LiveData<List<User>> getAllUsers() {
+        return userDAO.getAllUsers();
     }
 
     public ArrayList<SportsApp> getAllLogsByUserId(int loggedInUserId) {
