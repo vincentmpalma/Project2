@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        SportsApp app = new SportsApp(mLeague, mFirstInt, mSecondInt, loggedInUserId); //,make a new POJO
+        SportsApp app = new SportsApp(mLeague, loggedInUserId); //,make a new POJO
         repository.insertSportsApp(app); //inserting pojo we just created into the database through the repo
     }
 
@@ -238,17 +238,17 @@ public class MainActivity extends AppCompatActivity {
     private void getInfoFromDisplay() {
         mLeague = binding.favLeagueInputEditText.getText().toString();
 
-        try {
-            mFirstInt = Double.parseDouble(binding.integerInputEditText.getText().toString());
-        } catch (NumberFormatException e) {
-            Log.d(TAG, "Error reading value from first int edit text.");
-        }
-
-        try {
-            mSecondInt = Integer.parseInt(binding.doubleInputEditText.getText().toString());
-        } catch (NumberFormatException e) {
-            Log.d(TAG, "Error reading value from second int edit text.");
-        }
+//        try {
+//            mFirstInt = Double.parseDouble(binding.integerInputEditText.getText().toString());
+//        } catch (NumberFormatException e) {
+//            Log.d(TAG, "Error reading value from first int edit text.");
+//        }
+//
+//        try {
+//            mSecondInt = Integer.parseInt(binding.doubleInputEditText.getText().toString());
+//        } catch (NumberFormatException e) {
+//            Log.d(TAG, "Error reading value from second int edit text.");
+//        }
 
     }
 }

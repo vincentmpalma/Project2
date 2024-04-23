@@ -15,15 +15,13 @@ public class SportsApp {
     private int id;
 
     private String favLeague;
-    private double firstNum;
-    private int secondNum;
+    //private double firstNum;
+   // private int secondNum;
     private LocalDateTime date;
     private int userId;
 
-    public SportsApp(String favLeague, double firstNum, int secondNum, int userId) {
+    public SportsApp(String favLeague, int userId) {
         this.favLeague = favLeague;
-        this.firstNum = firstNum;
-        this.secondNum = secondNum;
         this.userId = userId;
         date = LocalDateTime.now();
     }
@@ -32,8 +30,6 @@ public class SportsApp {
     @Override
     public String toString() {
         return  favLeague + '\n' +
-                "First Number Entered = " + firstNum + '\n' +
-                "Second Number Entered = " + secondNum + '\n' +
                 "Date = " + date.toString() + '\n' +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
     }
@@ -43,12 +39,12 @@ public class SportsApp {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SportsApp sportsApp = (SportsApp) o;
-        return id == sportsApp.id && Double.compare(firstNum, sportsApp.firstNum) == 0 && secondNum == sportsApp.secondNum && userId == sportsApp.userId && Objects.equals(favLeague, sportsApp.favLeague) && Objects.equals(date, sportsApp.date);
+        return id == sportsApp.id && userId == sportsApp.userId && Objects.equals(favLeague, sportsApp.favLeague) && Objects.equals(date, sportsApp.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, favLeague, firstNum, secondNum, date, userId);
+        return Objects.hash(id, favLeague, date, userId);
     }
 
     public int getId() {
@@ -65,22 +61,6 @@ public class SportsApp {
 
     public void setFavLeague(String favLeague) {
         this.favLeague = favLeague;
-    }
-
-    public double getFirstNum() {
-        return firstNum;
-    }
-
-    public void setFirstNum(double firstNum) {
-        this.firstNum = firstNum;
-    }
-
-    public int getSecondNum() {
-        return secondNum;
-    }
-
-    public void setSecondNum(int secondNum) {
-        this.secondNum = secondNum;
     }
 
     public LocalDateTime getDate() {

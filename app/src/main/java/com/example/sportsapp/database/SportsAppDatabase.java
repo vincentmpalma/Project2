@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 
 //this class represents actual database, where our information is stored
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {SportsApp.class, User.class}, version = 2, exportSchema = false)
+@Database(entities = {SportsApp.class, User.class}, version = 1, exportSchema = false)
 public abstract class SportsAppDatabase extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
@@ -64,7 +64,7 @@ public abstract class SportsAppDatabase extends RoomDatabase {
                 UserDAO dao = INSTANCE.userDAO(); //make new dao instance
                 dao.deleteAll(); //delete all previous records
 
-                User admin = new User("admin1", "admin1"); //making default admin
+                User admin = new User("admin2", "admin2"); //making default admin
                 admin.setAdmin(true); //making it have admin boolean
                 dao.insert(admin); //inserting admin to database
 
