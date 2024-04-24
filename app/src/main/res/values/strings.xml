@@ -22,4 +22,7 @@
     <string name="add_user">Add User</string>
     <string name="users_info">Users Info</string>
     <string name="delete_user">Delete User</string>
+    <string name="mlb_scores">MLB Scores</string>
+    <string name="test">test</string>
+    <string name="mlb_score">MLB SCORES</string>
 </resources>

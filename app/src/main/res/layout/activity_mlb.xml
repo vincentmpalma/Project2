@@ -8,12 +8,12 @@
     tools:context=".MlbActivity">
 
     <TextView
+        android:id="@+id/testTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="test"
-        android:textSize="24sp"
         android:gravity="center"
-        android:id="@+id/testTextView"
-        />
+        android:text="@string/mlb_score"
+        android:textSize="24sp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
