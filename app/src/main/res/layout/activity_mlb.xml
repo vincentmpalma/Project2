@@ -2,18 +2,68 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MlbActivity">
 
-    <TextView
-        android:id="@+id/testTextView"
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="125dp"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/favorite_a_team"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:layout_marginTop="15dp"
+        />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="425dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mlbTitleTextView"
+        android:id="@+id/scrollView"
+        android:layout_marginTop="15dp">
+
+        <LinearLayout
+            android:id="@+id/my_layout"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:textAlignment="center"
+            tools:ignore="MissingConstraints">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/mlbTitleTextView"
+        android:layout_width="299dp"
+        android:layout_height="59dp"
+        android:layout_margin="0dp"
         android:gravity="center"
-        android:text="@string/mlb_score"
-        android:textSize="24sp" />
+        android:padding="0dp"
+        android:paddingTop="0dp"
+        android:text="@string/mlb_scores"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:layout_marginBottom="30dp"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="118dp"
+        android:layout_height="90dp"
+        android:contentDescription="@string/mlb_logo"
+        android:padding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mlb_logo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

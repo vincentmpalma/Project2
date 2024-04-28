@@ -25,4 +25,6 @@
     <string name="mlb_scores">MLB Scores</string>
     <string name="test">test</string>
     <string name="mlb_score">MLB SCORES</string>
+    <string name="mlb_logo">mlb_logo</string>
+    <string name="favorite_a_team">Favorite a Team</string>
 </resources>
