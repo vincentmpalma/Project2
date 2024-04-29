@@ -234,7 +234,7 @@ public class NbaActivity extends AppCompatActivity {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(NbaActivity.this);
         final AlertDialog alertDialog = alertBuilder.create();
 
-        alertDialog.setMessage("Logout?");
+        alertBuilder.setMessage("Logout?");
 
         alertBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
             @Override
@@ -249,8 +249,18 @@ public class NbaActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
+        alertBuilder.setNeutralButton("Back", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                backup();
+            }
+        });
 
         alertBuilder.create().show();
+    }
+    private void backup() {
+        getIntent().putExtra(NBA_ACTIVITY_USER_ID,loggedInUserId);
+        startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(),loggedInUserId));
     }
 
     private void logout() {
