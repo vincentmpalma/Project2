@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mlbPopUpActivity">
+
+    <TextView
+        android:id="@+id/titleOfGameTextView"
+        android:layout_width="253dp"
+        android:layout_height="73dp"
+        android:gravity="center"
+        android:text="TITLE OF GAME"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/homeTeamLogo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/home_team_logo"
+        android:foregroundGravity="left"
+        app:layout_constraintEnd_toStartOf="@+id/awayTeamLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleOfGameTextView" />
+
+    <ImageView
+        android:id="@+id/awayTeamLogo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/away_team_logo"
+        android:foregroundGravity="left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/homeTeamLogo"
+        app:layout_constraintTop_toBottomOf="@+id/titleOfGameTextView" />
+
+    <TextView
+        android:id="@+id/homeTeamNameTextView"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="68dp"
+        android:gravity="center"
+        android:text="HOME NAME"
+        android:textSize="15sp"
+        app:flow_horizontalAlign="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeTeamLogo" />
+
+    <TextView
+        android:id="@+id/awayTeamNameTextView"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="68dp"
+        android:gravity="center"
+        android:text="AWAY NAME"
+        android:textFontWeight="@integer/material_motion_duration_long_1"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/awayTeamLogo" />
+
+    <TextView
+        android:id="@+id/homeRunScore"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeTeamNameTextView" />
+
+    <TextView
+        android:id="@+id/awayRunScore"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        android:gravity="center"
+        android:text="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/awayTeamNameTextView" />
+
+    <TextView
+        android:id="@+id/runsTitleTextView"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+
+        android:layout_marginTop="108dp"
+        android:gravity="center"
+        android:text="RUNS"
+        app:layout_constraintEnd_toStartOf="@id/awayRunScore"
+
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toEndOf="@id/homeRunScore"
+        app:layout_constraintTop_toBottomOf="@id/titleOfGameTextView" />
+
+    <TextView
+        android:id="@+id/homeHits"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeRunScore" />
+
+    <TextView
+        android:id="@+id/awayHits"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        android:gravity="center"
+        android:text="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/awayRunScore" />
+
+    <TextView
+        android:id="@+id/hitsTextView"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="HITS"
+        app:layout_constraintEnd_toStartOf="@+id/awayHits"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toEndOf="@+id/homeHits"
+        app:layout_constraintTop_toBottomOf="@+id/runsTitleTextView"
+
+        />
+
+    <TextView
+        android:id="@+id/homeErrors"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeHits" />
+
+    <TextView
+        android:id="@+id/awayErrors"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        android:gravity="center"
+        android:text="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/awayHits" />
+
+    <TextView
+        android:id="@+id/errorsTextView"
+        android:layout_width="55dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="ERRORS"
+        app:layout_constraintEnd_toStartOf="@+id/awayErrors"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toEndOf="@+id/homeErrors"
+        app:layout_constraintTop_toBottomOf="@+id/hitsTextView"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

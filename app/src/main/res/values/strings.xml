@@ -27,4 +27,7 @@
     <string name="mlb_score">MLB SCORES</string>
     <string name="mlb_logo">mlb_logo</string>
     <string name="favorite_a_team">Favorite a Team</string>
+    <string name="nba_scores">NBA Scores</string>
+    <string name="away_team_logo">away team logo</string>
+    <string name="home_team_logo">home team logo</string>
 </resources>

@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/sportsAppDisplayTextView"
         android:layout_width="390dp"
-        android:layout_height="200dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dip"
         android:padding="8dp"
         android:text="@string/sportsapp_test"
@@ -100,7 +100,7 @@
         android:layout_width="390dp"
         android:layout_height="125dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mlbPage"
+        app:layout_constraintTop_toBottomOf="@id/nbaPage"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
         android:text="@string/admin_page"
@@ -118,6 +118,18 @@
         android:text="@string/mlb_scores"
         android:textSize="36sp"
         android:id="@+id/mlbPage"
+        />
+
+    <Button
+        android:layout_width="390dp"
+        android:layout_height="125dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mlbPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/nba_scores"
+        android:textSize="36sp"
+        android:id="@+id/nbaPage"
         />
 
 

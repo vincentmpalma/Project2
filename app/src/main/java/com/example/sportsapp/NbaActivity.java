@@ -10,11 +10,9 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -25,7 +23,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -34,37 +31,33 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.sportsapp.database.SportsAppRepository;
 import com.example.sportsapp.database.entities.User;
-import com.example.sportsapp.databinding.ActivityMlbBinding;
+import com.example.sportsapp.databinding.ActivityNbaBinding;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MlbActivity extends AppCompatActivity {
+public class NbaActivity extends AppCompatActivity {
 
-    private static final String MLB_ACTIVITY_USER_ID = "com.example.sportsapp.MAIN_ACTIVITY_USER_ID";
+    ActivityNbaBinding binding;
+    private static final String NBA_ACTIVITY_USER_ID = "com.example.sportsapp.MAIN_ACTIVITY_USER_ID";
     static final String SHARED_PREFERENCE_USERID_KEY = "com.example.sportsapp.SHARED_PREFERENCE_USERID_KEY";
     static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.sportsapp.SAVED_INSTANCE_STATE_USERID_KEY";
     private static final int LOGGED_OUT = -1;
     private int loggedInUserId = -1;
     private SportsAppRepository repository;
-    com.example.sportsapp.databinding.ActivityMlbBinding binding;
     private User user;
-
-    TextView data;
-    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMlbBinding.inflate(getLayoutInflater());
+        binding = ActivityNbaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         repository = SportsAppRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
-
         loadData();
+
     }
 
     private void loadData() {
@@ -80,7 +73,7 @@ public class MlbActivity extends AppCompatActivity {
 
 
 
-        String url = "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard";
+        String url = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -105,27 +98,20 @@ public class MlbActivity extends AppCompatActivity {
                             JSONObject awayTeamJSONObject = awayTeam.getJSONObject("team");
 
 
+
+
                             String homeDisplayName = homeTeamJSONObject.getString("displayName");
                             String awayDisplayName = awayTeamJSONObject.getString("displayName");
+
+                            Log.i("NBA", homeDisplayName);
 
                             String homeScore = homeTeam.getString("score");
                             String awayScore = awayTeam.getString("score");
 
-                           String homeName = homeTeamJSONObject.getString("abbreviation");
-                           String awayName = awayTeamJSONObject.getString("abbreviation");
-
-                            String homeHits = homeTeam.getString("hits");
-                            String awayHits = awayTeam.getString("hits");
-
-                            String homeErrors = homeTeam.getString("errors");
-                            String awayErrors = awayTeam.getString("errors");
-
-
-
                             JSONObject status = competition.getJSONObject("status");
                             JSONObject type = status.getJSONObject("type");
                             boolean isCompleted = type.getBoolean("completed");
-                            int inning = status.getInt("period");
+                            int quarter = status.getInt("period");
 
                             String homeLogoUrl = homeTeamJSONObject.getString("logo"); // Assuming 'logo' is the key for the logo URL
                             String awayLogoUrl = awayTeamJSONObject.getString("logo");
@@ -145,7 +131,7 @@ public class MlbActivity extends AppCompatActivity {
                             if (isCompleted) {
                                 resultString.append("FINAL").append("\n");
                             } else {
-                                resultString.append("Inning: ").append(inning).append("\n");
+                                resultString.append("Quarter: ").append(quarter).append("\n");
                             }
 
                             StringBuilder gameTitleString = new StringBuilder(homeDisplayName + " vs " + awayDisplayName);
@@ -155,14 +141,6 @@ public class MlbActivity extends AppCompatActivity {
                             gameTitleTextView.setTextSize(15);
                             gameTitleTextView.setGravity(Gravity.CENTER);
                             gameTitleTextView.setText(gameTitleString);
-
-                            gameTitleTextView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors);
-                                    startActivity(intent);
-                                }
-                            });
 
 
                             TextView textView = new TextView(getApplicationContext());
@@ -220,10 +198,9 @@ public class MlbActivity extends AppCompatActivity {
 
     }
 
-
-    static Intent mlbIntentFactory(Context context, int userId) {
-        Intent intent = new Intent(context, MlbActivity.class);
-        intent.putExtra(MLB_ACTIVITY_USER_ID, userId);
+    static Intent nbaIntentFactory(Context context, int userId) {
+        Intent intent = new Intent(context, NbaActivity.class);
+        intent.putExtra(NBA_ACTIVITY_USER_ID, userId);
         return intent;
     }
 
@@ -254,7 +231,7 @@ public class MlbActivity extends AppCompatActivity {
     }
 
     private void showLogoutDialog() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MlbActivity.this);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(NbaActivity.this);
         final AlertDialog alertDialog = alertBuilder.create();
 
         alertDialog.setMessage("Logout?");
@@ -280,7 +257,7 @@ public class MlbActivity extends AppCompatActivity {
 
         loggedInUserId = LOGGED_OUT;
         updateSharedPreference();
-        getIntent().putExtra(MLB_ACTIVITY_USER_ID, loggedInUserId);
+        getIntent().putExtra(NBA_ACTIVITY_USER_ID, loggedInUserId);
 
         startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
     }
@@ -298,7 +275,7 @@ public class MlbActivity extends AppCompatActivity {
         }
 
         if (loggedInUserId == LOGGED_OUT) {
-            loggedInUserId = getIntent().getIntExtra(MLB_ACTIVITY_USER_ID, LOGGED_OUT);
+            loggedInUserId = getIntent().getIntExtra(NBA_ACTIVITY_USER_ID, LOGGED_OUT);
         }
 
         if (loggedInUserId == LOGGED_OUT) {
@@ -320,6 +297,4 @@ public class MlbActivity extends AppCompatActivity {
         sharedPrefEditor.putInt(getString(R.string.preference_user_Id_key), loggedInUserId); //putting key and the corresponding value (LOGGED_OUT here for his logout function
         sharedPrefEditor.apply(); //apply changes
     }
-
-
 }
