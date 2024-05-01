@@ -5,15 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.sportsapp.databinding.ActivityAdminBinding;
+
+
 import com.example.sportsapp.databinding.ActivityDelete2Binding;
-import com.example.sportsapp.databinding.ActivitySearchBinding;
+
 
 public class DeleteActivity extends AppCompatActivity {
     private static final String DElETE_ACTIVITY_USER_ID = "com.example.sportsapp.DElETE_ACTIVITY_USER_ID";
@@ -44,8 +41,8 @@ public class DeleteActivity extends AppCompatActivity {
     private void delete() {
     }
 
-    static Intent searchActivityIntentFactory(Context context, int userId) {
-        Intent intent = new Intent(context, SearchActivity.class);
+    static Intent deleteActivityIntentFactory(Context context, int userId) {
+        Intent intent = new Intent(context, DeleteActivity.class);
         intent.putExtra(DElETE_ACTIVITY_USER_ID, userId);
         return intent;
     }
