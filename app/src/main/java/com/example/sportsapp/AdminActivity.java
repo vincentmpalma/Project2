@@ -50,6 +50,7 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // make new add user similar to register but different for specifically admin
         binding.addUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
