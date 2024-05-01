@@ -30,4 +30,11 @@
     <string name="nba_scores">NBA Scores</string>
     <string name="away_team_logo">away team logo</string>
     <string name="home_team_logo">home team logo</string>
+    <string name="search">Search</string>
+    <string name="delete">Delete</string>
+    <string name="my_stats">My Stats</string>
+    <string name="leagues">Leagues:</string>
+    <string name="guest">Guest</string>
+    <string name="do_you_want_to_delete">Do You want to Delete?</string>
+    <string name="cancel">Cancel</string>
 </resources>

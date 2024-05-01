@@ -68,14 +68,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        binding.logButton.setOnClickListener(new View.OnClickListener() { //making on click listener for Submit button
-            @Override
-            public void onClick(View v) {
-                getInfoFromDisplay(); //gets values from edit text and stores them in m variables
-                insertSportsAppRecord(); //insert records from inputs into the database
-                updateDisplay(); //updates the display
-            }
-        });
+        //binding.logButton.setOnClickListener(new View.OnClickListener() { //making on click listener for Submit button
+        //    @Override
+        //    public void onClick(View v) {
+        //        getInfoFromDisplay(); //gets values from edit text and stores them in m variables
+        //        insertSportsAppRecord(); //insert records from inputs into the database
+        //       updateDisplay(); //updates the display
+        //    }
+        //});
 
         binding.adminPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,14 +101,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         //dont know why he did this, can prob just comment it out
-        binding.favLeagueInputEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateDisplay();
-            }
-        });
+        //binding.favLeagueInputEditText.setOnClickListener(new View.OnClickListener() {
+         //   @Override
+           /// public void onClick(View v) {
+              //  updateDisplay();
+           // }
+        //});
 
     }
 
@@ -251,8 +250,8 @@ public class MainActivity extends AppCompatActivity {
         //Log.i(TAG, repository.getAllLogs().toString());
     }
 
-    private void getInfoFromDisplay() {
-        mLeague = binding.favLeagueInputEditText.getText().toString();
+//    private void getInfoFromDisplay() {
+//        mLeague = binding.favLeagueInputEditText.getText().toString();
 
 //        try {
 //            mFirstInt = Double.parseDouble(binding.integerInputEditText.getText().toString());
@@ -266,5 +265,5 @@ public class MainActivity extends AppCompatActivity {
 //            Log.d(TAG, "Error reading value from second int edit text.");
 //        }
 
-    }
+  //  }
 }
