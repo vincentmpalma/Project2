@@ -42,6 +42,14 @@ public class AdminActivity extends AppCompatActivity {
 
         repository = SportsAppRepository.getRepository(getApplication());
         loginUser(savedInstanceState); //make sure user is logged in and we have user object
+
+        binding.deleteUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = DeleteAdminActivity.deleteadminActivityIntentFactory(getApplicationContext(),loggedInUserId);
+                startActivity(intent);
+            }
+        });
     }
 
     static Intent adminPageIntentFactory(Context context,  int userId) {

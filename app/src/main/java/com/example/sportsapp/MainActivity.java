@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         updateSharedPreference();
 
-        binding.sportsAppDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
+        //binding.sportsAppDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
         updateDisplay();
 
 
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateDisplay() {
         ArrayList<SportsApp> allLogs = repository.getAllLogsByUserId(loggedInUserId);
         if (allLogs.isEmpty()) {
-            binding.sportsAppDisplayTextView.setText(R.string.nothing_to_show);
+            //binding.sportsAppDisplayTextView.setText(R.string.nothing_to_show);
         } else {
 
             StringBuilder sb = new StringBuilder();
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                 sb.append(app);
             }
 
-            binding.sportsAppDisplayTextView.setText(sb.toString());
+           // binding.sportsAppDisplayTextView.setText(sb.toString());
 
         }
         //String currentInfo = binding.sportsAppDisplayTextView.getText().toString();

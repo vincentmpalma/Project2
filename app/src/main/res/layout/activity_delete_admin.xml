@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeleteAdminActivity">
+    <TextView
+        android:id="@+id/deleteTextView"
+        android:layout_width="390dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="75dip"
+        android:text="@string/who_do_you_want_to_delete"
+        android:textSize="25sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/admininputEditText"
+        android:layout_width="390dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="75dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deleteTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/username"
+        android:gravity="center"
+        android:textSize="24sp"
+        />
+    <Button
+        android:layout_width="390dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/admininputEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="125dp"
+        android:text="@string/delete"
+        android:textSize="36sp"
+        android:id="@+id/deleteButton"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
