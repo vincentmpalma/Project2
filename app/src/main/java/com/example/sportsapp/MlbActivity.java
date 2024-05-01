@@ -65,6 +65,14 @@ public class MlbActivity extends AppCompatActivity {
 
 
         loadData();
+
+        binding.favoriteATeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MlbSearchActivity.mlbSearchIntentFacotry(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     private void loadData() {
