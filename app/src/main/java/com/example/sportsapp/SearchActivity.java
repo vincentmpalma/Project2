@@ -43,9 +43,7 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    static Intent searchActivityIntentFactory(Context context, int userId) {
-        Intent intent = new Intent(context, SearchActivity.class);
-        intent.putExtra(SEARCH_ACTIVITY_USER_ID, userId);
-        return intent;
+    static Intent searchIntentFactory(Context context) {
+        return new Intent(context, SearchActivity.class);
     }
 }

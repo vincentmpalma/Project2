@@ -50,6 +50,13 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        binding.addUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = RegisterActivity.registerIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     static Intent adminPageIntentFactory(Context context,  int userId) {

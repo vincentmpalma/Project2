@@ -39,6 +39,7 @@ public class DeleteActivity extends AppCompatActivity {
     }
 
     private void delete() {
+
     }
 
     static Intent deleteActivityIntentFactory(Context context, int userId) {
