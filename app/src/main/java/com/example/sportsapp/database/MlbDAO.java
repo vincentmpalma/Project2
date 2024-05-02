@@ -25,5 +25,8 @@ public interface MlbDAO {
     @Query("DELETE from " + SportsAppDatabase.MLB_TABLE)
     void deleteAll();
 
+    @Query("SELECT * FROM " + SportsAppDatabase.MLB_TABLE + " WHERE fullName LIKE '%' || :search || '%'")
+    LiveData<List<MlbTeam>>getTeamsBySearch(String search);
+
 
 }

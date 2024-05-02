@@ -12,22 +12,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MLB SEARCH"
-        tools:layout_editor_absoluteX="156dp"
-        tools:layout_editor_absoluteY="331dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="24sp"
-        />
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="331dp" />
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:text="Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/searchEditText"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/searchButton"/>
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="580dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText">
 
         <LinearLayout
             android:id="@+id/my_layout"

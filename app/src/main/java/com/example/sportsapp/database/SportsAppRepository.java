@@ -103,6 +103,10 @@ public class SportsAppRepository {
         return mlbDAO.getAllTeams();
     }
 
+    public LiveData<List<MlbTeam>>getTeamsBySearch(String search){
+        return mlbDAO.getTeamsBySearch(search);
+    }
+
     public void insertMlbTeam(MlbTeam... mlbteam){
         SportsAppDatabase.databaseWriteExecutor.execute(()->
         {
