@@ -146,8 +146,14 @@ public class MainActivity extends AppCompatActivity {
                 if(!user.isAdmin()){
                     binding.adminPage.setVisibility(View.INVISIBLE);
                 }
+                if(user.isAdmin()){
+                    binding.MyDeleteButton.setVisibility(View.INVISIBLE);
+
+                }
             }
         });
+
+
     }
 
     @Override
