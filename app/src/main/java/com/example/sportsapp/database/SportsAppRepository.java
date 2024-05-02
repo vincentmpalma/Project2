@@ -82,6 +82,12 @@ public class SportsAppRepository {
             userDAO.insert(user);
         });
     }
+    public void deleteUser(User user){
+        SportsAppDatabase.databaseWriteExecutor.execute(()->
+        {
+            userDAO.delete(user);
+        });
+    }
 
 
     public LiveData<User> getUserByUserName(String username) {

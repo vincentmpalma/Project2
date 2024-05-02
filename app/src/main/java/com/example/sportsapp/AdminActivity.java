@@ -54,7 +54,7 @@ public class AdminActivity extends AppCompatActivity {
         binding.addUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = RegisterActivity.registerIntentFactory(getApplicationContext());
+                Intent intent = AdminCreateActivity.admincreateIntent(getApplicationContext());
                 startActivity(intent);
             }
         });

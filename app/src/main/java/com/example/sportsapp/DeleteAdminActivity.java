@@ -42,6 +42,7 @@ public class DeleteAdminActivity extends AppCompatActivity {
     }
 
     private void delete() {
+
     }
 
     static Intent deleteadminActivityIntentFactory(Context context, int userId) {

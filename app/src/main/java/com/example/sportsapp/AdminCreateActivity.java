@@ -91,7 +91,7 @@ public class AdminCreateActivity extends AppCompatActivity {
             if (!found) {
                 repository.insertUser(new User(username, password));
                 Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT).show();
-                Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
+                Intent intent = AdminActivity.adminPageIntentFactory(getApplicationContext(),loggedInUserId);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, "Username is Taken", Toast.LENGTH_SHORT).show();
@@ -140,5 +140,8 @@ public class AdminCreateActivity extends AppCompatActivity {
     }
     private void backup() {
         startActivity(AdminActivity.adminPageIntentFactory(getApplicationContext(),loggedInUserId));
+    }
+    static Intent admincreateIntent(Context context) {
+        return new Intent(context, AdminCreateActivity.class);
     }
 }
