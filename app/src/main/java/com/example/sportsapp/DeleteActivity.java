@@ -59,6 +59,7 @@ public class DeleteActivity extends AppCompatActivity {
     private void delete() {
         repository.deleteUser(user);
         Toast.makeText(this, "Account Deleted", Toast.LENGTH_SHORT).show();
+        updateSharedPreference();
         Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
         startActivity(intent);
     }
@@ -135,5 +136,11 @@ public class DeleteActivity extends AppCompatActivity {
                 invalidateOptionsMenu();
             }
         });
+    }
+    private void updateSharedPreference() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE); //getting reference for shared preference for this app
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit(); //make it editable
+        sharedPrefEditor.putInt(getString(R.string.preference_user_Id_key), loggedInUserId); //putting key and the corresponding value (LOGGED_OUT here for his logout function
+        sharedPrefEditor.apply(); //apply changes
     }
 }
