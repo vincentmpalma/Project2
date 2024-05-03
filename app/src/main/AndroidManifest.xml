@@ -36,6 +36,12 @@
             android:name=".mlbPopUpActivity"
             android:exported="false"
             android:theme="@style/PopupActivityTheme" />
+            android:name=".MlbSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mlbPopUpActivity"
+            android:exported="false"
+            android:theme="@style/PopupActivityTheme" />
         <activity
             android:name=".NbaActivity"
             android:exported="false" />

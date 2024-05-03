@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.sportsapp.database.entities.MlbTeam;
 import com.example.sportsapp.database.entities.SportsApp;
 import com.example.sportsapp.MainActivity;
 import com.example.sportsapp.database.entities.User;
@@ -18,6 +19,7 @@ import java.util.concurrent.Future;
 public class SportsAppRepository {
     private final SportsAppDAO sportsAppDAO;
     private final UserDAO userDAO;
+    private final MlbDAO mlbDAO;
     private ArrayList<SportsApp> allLogs;
 
     private static SportsAppRepository repository;
@@ -26,6 +28,7 @@ public class SportsAppRepository {
         SportsAppDatabase db = SportsAppDatabase.getDatabase(application);
         this.sportsAppDAO = db.sportsAppDAO();
         this.userDAO = db.userDAO();
+        this.mlbDAO = db.mlbDAO();
         this.allLogs = (ArrayList<SportsApp>) this.sportsAppDAO.getAllRecords();
     }
 
@@ -100,6 +103,21 @@ public class SportsAppRepository {
 
     public LiveData<List<User>> getAllUsers() {
         return userDAO.getAllUsers();
+    }
+
+    public LiveData<List<MlbTeam>> getAllMlbTeams(){
+        return mlbDAO.getAllTeams();
+    }
+
+    public LiveData<List<MlbTeam>>getTeamsBySearch(String search){
+        return mlbDAO.getTeamsBySearch(search);
+    }
+
+    public void insertMlbTeam(MlbTeam... mlbteam){
+        SportsAppDatabase.databaseWriteExecutor.execute(()->
+        {
+            mlbDAO.insert(mlbteam);
+        });
     }
 
     public ArrayList<SportsApp> getAllLogsByUserId(int loggedInUserId) {
