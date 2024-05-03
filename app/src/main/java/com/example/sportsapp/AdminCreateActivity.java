@@ -98,9 +98,6 @@ public class AdminCreateActivity extends AppCompatActivity {
             }
         });
     }
-    static Intent registerIntentFactory(Context context) {
-        return new Intent(context, AdminActivity.class);
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

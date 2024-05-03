@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".UserInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminCreateActivity"
             android:exported="false" />
         <activity
