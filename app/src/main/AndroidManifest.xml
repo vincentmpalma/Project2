@@ -21,9 +21,6 @@
             android:name=".AdminCreateActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateUserActivity"
-            android:exported="false" />
-        <activity
             android:name=".DeleteAdminActivity"
             android:exported="false" />
         <activity
@@ -36,12 +33,9 @@
             android:name=".mlbPopUpActivity"
             android:exported="false"
             android:theme="@style/PopupActivityTheme" />
+        <activity
             android:name=".MlbSearchActivity"
             android:exported="false" />
-        <activity
-            android:name=".mlbPopUpActivity"
-            android:exported="false"
-            android:theme="@style/PopupActivityTheme" />
         <activity
             android:name=".NbaActivity"
             android:exported="false" />
