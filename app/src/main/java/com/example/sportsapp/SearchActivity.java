@@ -23,7 +23,7 @@ import com.example.sportsapp.databinding.ActivitySearchBinding;
 
 public class SearchActivity extends AppCompatActivity {
     private static final String SEARCH_ACTIVITY_USER_ID = "com.example.sportsapp.SEARCH_ACTIVITY_USER_ID";
-    private int loggedInUserId = -1;
+    private int loggedInUserId = 1111;
     private ActivitySearchBinding binding;
 
     @Override

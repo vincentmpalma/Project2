@@ -73,6 +73,13 @@ public class MlbActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SearchActivity.searchIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     private void loadData() {
@@ -329,6 +336,10 @@ public class MlbActivity extends AppCompatActivity {
             this.user = user;
             if (user != null) {
                 invalidateOptionsMenu();
+                binding.backButton.setVisibility(View.INVISIBLE);
+            }
+            if(loggedInUserId==1111){
+                binding.favoriteATeamButton.setVisibility(View.INVISIBLE);
             }
         });
     }

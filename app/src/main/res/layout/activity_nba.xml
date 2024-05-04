@@ -7,12 +7,25 @@
     tools:context=".NbaActivity">
 
     <Button
+        android:id="@+id/mynbafavoriteButton"
         android:layout_width="275dp"
         android:layout_height="110dp"
         app:layout_constraintTop_toBottomOf="@+id/scrollView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/favorite_a_team"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        />
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="275dp"
+        android:layout_height="110dp"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/back"
         android:textAlignment="center"
         android:textSize="25sp"
         android:layout_marginTop="15dp"

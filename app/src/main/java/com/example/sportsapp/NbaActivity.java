@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,6 +59,13 @@ public class NbaActivity extends AppCompatActivity {
 
         loadData();
 
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SearchActivity.searchIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     private void loadData() {
@@ -297,6 +305,10 @@ public class NbaActivity extends AppCompatActivity {
             this.user = user;
             if (user != null) {
                 invalidateOptionsMenu();
+                binding.backButton.setVisibility(View.INVISIBLE);
+            }
+            if(loggedInUserId==1111){
+                binding.mynbafavoriteButton.setVisibility(View.INVISIBLE);
             }
         });
     }
