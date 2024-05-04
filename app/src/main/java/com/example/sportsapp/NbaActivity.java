@@ -112,6 +112,7 @@ public class NbaActivity extends AppCompatActivity {
                             JSONObject type = status.getJSONObject("type");
                             boolean isCompleted = type.getBoolean("completed");
                             int quarter = status.getInt("period");
+                            String time = status.getString("displayClock");
 
                             String homeLogoUrl = homeTeamJSONObject.getString("logo"); // Assuming 'logo' is the key for the logo URL
                             String awayLogoUrl = awayTeamJSONObject.getString("logo");
@@ -166,16 +167,31 @@ public class NbaActivity extends AppCompatActivity {
                             resultTextView.setTextSize(25);
                             resultTextView.setText(resultString);
 
+                            TextView timeTextView = new TextView(getApplicationContext());
+                            timeTextView.setLayoutParams(textParams);
+                            timeTextView.setTextSize(15);
+                            timeTextView.setText(time);
+
                             LinearLayout resultLinearLayout = new LinearLayout(getApplicationContext());
                             resultLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
                             resultLinearLayout.setGravity(Gravity.CENTER);
                             resultLinearLayout.addView(resultTextView);
 
+                            LinearLayout timeLinearLayout = new LinearLayout(getApplicationContext());
+                            timeLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                            timeLinearLayout.setGravity(Gravity.CENTER);
+                            timeLinearLayout.addView(timeTextView);
+
+
+
+
 
 
                             binding.myLayout.addView(gameTitleLinearLayout);
                             binding.myLayout.addView(linearLayout);
+                            binding.myLayout.addView(timeLinearLayout);
                             binding.myLayout.addView(resultLinearLayout);
+
 
                         }
 

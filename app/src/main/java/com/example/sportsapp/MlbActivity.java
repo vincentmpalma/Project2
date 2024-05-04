@@ -106,6 +106,11 @@ public class MlbActivity extends AppCompatActivity {
                             JSONArray competitorsArray = competition.getJSONArray("competitors");
 
 
+                            JSONObject venueObject = competition.getJSONObject("venue");
+                            String venue = venueObject.getString("fullName");
+                            JSONObject address = venueObject.getJSONObject("address");
+
+
                             JSONObject homeTeam = competitorsArray.getJSONObject(0);
                             JSONObject awayTeam = competitorsArray.getJSONObject(1);
 
@@ -127,6 +132,8 @@ public class MlbActivity extends AppCompatActivity {
 
                             String homeErrors = homeTeam.getString("errors");
                             String awayErrors = awayTeam.getString("errors");
+
+
 
 
 
@@ -173,6 +180,9 @@ public class MlbActivity extends AppCompatActivity {
                             });
 
 
+
+
+
                             TextView textView = new TextView(getApplicationContext());
                             textView.setLayoutParams(textParams);
                             textView.setTextSize(25);
@@ -203,9 +213,25 @@ public class MlbActivity extends AppCompatActivity {
 
 
 
+
+
                             binding.myLayout.addView(gameTitleLinearLayout);
                             binding.myLayout.addView(linearLayout);
+                            if(competition.has("situation")){
+                                JSONObject situation = competition.getJSONObject("situation");
+                                if(situation.has("outs")){
+                                    int outs = situation.getInt("outs");
+                                    TextView outsView = new TextView(getApplicationContext());
+                                    outsView.setLayoutParams(textParams);
+                                    outsView.setTextSize(15);
+                                    outsView.setText("Outs: " + outs);
+                                    binding.myLayout.addView(outsView);
+
+
+                                }
+                            }
                             binding.myLayout.addView(resultLinearLayout);
+
 
                         }
 
