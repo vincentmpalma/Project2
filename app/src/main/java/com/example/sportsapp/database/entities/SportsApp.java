@@ -18,21 +18,18 @@ public class SportsApp {
     private String league;
     //private double firstNum;
    // private int secondNum;
-    private LocalDateTime date;
     private int userId;
 
     public SportsApp(String favTeamAbv, String league, int userId) {
         this.favTeamAbv = favTeamAbv;
         this.league = league;
         this.userId = userId;
-        date = LocalDateTime.now();
     }
 
     @NonNull
     @Override
     public String toString() {
         return  favTeamAbv + '\n' +
-                "Date = " + date.toString() + '\n' +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
     }
 
@@ -41,12 +38,12 @@ public class SportsApp {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SportsApp sportsApp = (SportsApp) o;
-        return id == sportsApp.id && userId == sportsApp.userId && Objects.equals(favTeamAbv, sportsApp.favTeamAbv) && Objects.equals(league, sportsApp.league) && Objects.equals(date, sportsApp.date);
+        return id == sportsApp.id && userId == sportsApp.userId && Objects.equals(favTeamAbv, sportsApp.favTeamAbv) && Objects.equals(league, sportsApp.league);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, favTeamAbv, league, date, userId);
+        return Objects.hash(id, favTeamAbv, league, userId);
     }
 
     public int getId() {
@@ -81,12 +78,5 @@ public class SportsApp {
         this.userId = userId;
     }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
 
 }

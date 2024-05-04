@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,13 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
@@ -31,13 +26,12 @@ import com.example.sportsapp.database.SportsAppRepository;
 import com.example.sportsapp.database.entities.MlbTeam;
 import com.example.sportsapp.database.entities.SportsApp;
 import com.example.sportsapp.database.entities.User;
-import com.example.sportsapp.databinding.ActivityMlbSearchBinding;
+import com.example.sportsapp.databinding.ActivityFavortieTeamsBinding;
 
-import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 
-
-public class MlbSearchActivity extends AppCompatActivity {
+public class favortieTeams extends AppCompatActivity {
 
     private static final String MLB_ACTIVITY_USER_ID = "com.example.sportsapp.MAIN_ACTIVITY_USER_ID";
     static final String SHARED_PREFERENCE_USERID_KEY = "com.example.sportsapp.SHARED_PREFERENCE_USERID_KEY";
@@ -47,40 +41,26 @@ public class MlbSearchActivity extends AppCompatActivity {
     private SportsAppRepository repository;
     private User user;
 
-    ActivityMlbSearchBinding binding;
+    ActivityFavortieTeamsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMlbSearchBinding.inflate(getLayoutInflater());
+        binding = ActivityFavortieTeamsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         repository = SportsAppRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
-        displayAllTeams();
 
-
-        binding.searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String search = binding.searchEditText.getText().toString();
-                if(!search.isEmpty()){
-                    displaySearchTeams(search);
-                } else {
-                    clearLayout();
-                    displayAllTeams();
-                }
-            }
-        });
-
+        displayTeams();
     }
 
-    public static Intent mlbSearchIntentFacotry(Context context){
-        Intent intent = new Intent(context, MlbSearchActivity.class);
-        return intent;
-    }
+    private void displayTeams(){
+        ArrayList<SportsApp> list = repository.getAllLogsByUserId(loggedInUserId);
 
-    private void displayAllTeams(){
+
+
         LiveData<List<MlbTeam>> teamObserver = repository.getAllMlbTeams(); //live data
 
         Observer<List<MlbTeam>> observer = new Observer<List<MlbTeam>>() {
@@ -90,111 +70,51 @@ public class MlbSearchActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 buttonParams.bottomMargin = 100;
+                String test = "";
                 for (MlbTeam team : mlbTeams) {
                     //binding.textView.setText(binding.textView.getText().toString() + " " + team.getTeamName());
 
-                    TextView nameTextView = new TextView(getApplicationContext());
-                    nameTextView.setLayoutParams(textParams);
-                    nameTextView.setTextSize(25);
-                    nameTextView.setText(team.getFullName());
+                    for(int i = 0; i < list.size(); i++) {
 
-                    TextView divisionTextView = new TextView(getApplicationContext());
-                    divisionTextView.setLayoutParams(textParams);
-                    divisionTextView.setTextSize(15);
-                    divisionTextView.setText(team.getLeague() + " League " + team.getDivision());
+                        if(team.getAcronym().equalsIgnoreCase(list.get(i).getFavTeamAbv())) {
 
-                    ImageView logoImageView = new ImageView(getApplicationContext());
-                    logoImageView.setLayoutParams(imageParams);
-                    Glide.with(getApplicationContext()).load(team.getLogo()).into(logoImageView);
+                            test += team.getAcronym();
 
-                    Button button = new Button(getApplicationContext());
-                    button.setText("Favorite");
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(MlbSearchActivity.this, team.getTeamName(), Toast.LENGTH_SHORT).show();
-                            repository.insertSportsApp(new SportsApp(team.getAcronym(),"MLB", loggedInUserId));
+                            TextView nameTextView = new TextView(getApplicationContext());
+                            nameTextView.setLayoutParams(textParams);
+                            nameTextView.setTextSize(15);
+                            nameTextView.setText(team.getFullName());
+//
+//                            TextView divisionTextView = new TextView(getApplicationContext());
+//                            divisionTextView.setLayoutParams(textParams);
+//                            divisionTextView.setTextSize(15);
+//                            divisionTextView.setText(team.getLeague() + " League " + team.getDivision());
+//
+                            ImageView logoImageView = new ImageView(getApplicationContext());
+                            logoImageView.setLayoutParams(imageParams);
+                            Glide.with(getApplicationContext()).load(team.getLogo()).into(logoImageView);
+//
+//
+                            binding.myLayout.addView(nameTextView);
+//                            binding.myLayout.addView(divisionTextView);
+                            binding.myLayout.addView(logoImageView);
+//                            binding.myLayout.addView(button);
                         }
-                    });
-                    button.setLayoutParams(buttonParams);
-
-
-
-
-                    binding.myLayout.addView(nameTextView);
-                    binding.myLayout.addView(divisionTextView);
-                    binding.myLayout.addView(logoImageView);
-                    binding.myLayout.addView(button);
-
-
+                    }
                 }
+                //binding.textView3.setText(test);
             }
         };
+
         teamObserver.observe(this, observer);
+
     }
 
-    private void displaySearchTeams(String search){
-        clearLayout();
-
-        LiveData<List<MlbTeam>> teamObserver = repository.getTeamsBySearch(search); //live data
-
-        Observer<List<MlbTeam>> observer = new Observer<List<MlbTeam>>() {
-            @Override
-            public void onChanged(List<MlbTeam> mlbTeams) {
-                LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(175, 175);
-                LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                buttonParams.bottomMargin = 100;
-                for (MlbTeam team : mlbTeams) {
-                    //binding.textView.setText(binding.textView.getText().toString() + " " + team.getTeamName());
-
-                    TextView nameTextView = new TextView(getApplicationContext());
-                    nameTextView.setLayoutParams(textParams);
-                    nameTextView.setTextSize(25);
-                    nameTextView.setText(team.getFullName());
-
-                    TextView divisionTextView = new TextView(getApplicationContext());
-                    divisionTextView.setLayoutParams(textParams);
-                    divisionTextView.setTextSize(15);
-                    divisionTextView.setText(team.getLeague() + " League " + team.getDivision());
-
-                    ImageView logoImageView = new ImageView(getApplicationContext());
-                    logoImageView.setLayoutParams(imageParams);
-                    Glide.with(getApplicationContext()).load(team.getLogo()).into(logoImageView);
-
-                    Button button = new Button(getApplicationContext());
-                    button.setText("Favorite");
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(MlbSearchActivity.this, team.getTeamName(), Toast.LENGTH_SHORT).show();
-                            repository.insertSportsApp(new SportsApp(team.getAcronym(),"MLB", loggedInUserId));
-                        }
-                    });
-                    button.setLayoutParams(buttonParams);
-
-
-
-
-
-
-                    binding.myLayout.addView(nameTextView);
-                    binding.myLayout.addView(divisionTextView);
-                    binding.myLayout.addView(logoImageView);
-                    binding.myLayout.addView(button);
-                }
-            }
-        };
-        teamObserver.observe(this, observer);
+    public static Intent favoriteTeamsIntentFactory(Context context){
+        Intent intent = new Intent(context, favortieTeams.class);
+        return intent;
     }
 
-    private void clearLayout(){
-        int childCount = binding.myLayout.getChildCount();
-        for (int i = childCount - 1; i >= 0; i--) {
-            View childView = binding.myLayout.getChildAt(i);
-            binding.myLayout.removeView(childView);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -222,7 +142,7 @@ public class MlbSearchActivity extends AppCompatActivity {
     }
 
     private void showLogoutDialog() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MlbSearchActivity.this);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(favortieTeams.this);
         final AlertDialog alertDialog = alertBuilder.create();
 
         alertDialog.setMessage("Logout?");
@@ -289,4 +209,3 @@ public class MlbSearchActivity extends AppCompatActivity {
         sharedPrefEditor.apply(); //apply changes
     }
 }
-

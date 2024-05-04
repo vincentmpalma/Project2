@@ -15,9 +15,9 @@ public interface SportsAppDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(SportsApp sportsapp);
 
-    @Query("SELECT * FROM " + SportsAppDatabase.SPORTS_APP_TABLE + " ORDER BY date DESC")
+    @Query("SELECT * FROM " + SportsAppDatabase.SPORTS_APP_TABLE)
     List<SportsApp> getAllRecords();
 
-    @Query("SELECT * FROM " + SportsAppDatabase.SPORTS_APP_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
+    @Query("SELECT * FROM " + SportsAppDatabase.SPORTS_APP_TABLE + " WHERE userId = :loggedInUserId")
     List<SportsApp> getRecordsetUserId(int loggedInUserId);
 }

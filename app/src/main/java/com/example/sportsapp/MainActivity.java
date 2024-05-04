@@ -108,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        binding.SearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = favortieTeams.favoriteTeamsIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
         //dont know why he did this, can prob just comment it out
         //binding.favLeagueInputEditText.setOnClickListener(new View.OnClickListener() {
          //   @Override
