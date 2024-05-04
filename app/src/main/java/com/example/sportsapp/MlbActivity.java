@@ -171,13 +171,7 @@ public class MlbActivity extends AppCompatActivity {
                             gameTitleTextView.setGravity(Gravity.CENTER);
                             gameTitleTextView.setText(gameTitleString);
 
-                            gameTitleTextView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors);
-                                    startActivity(intent);
-                                }
-                            });
+
 
 
 
@@ -230,7 +224,19 @@ public class MlbActivity extends AppCompatActivity {
 
                                 }
                             }
+
+                            resultLinearLayout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors);
+                                    startActivity(intent);
+                                }
+                            });
+
+
+
                             binding.myLayout.addView(resultLinearLayout);
+
 
 
                         }

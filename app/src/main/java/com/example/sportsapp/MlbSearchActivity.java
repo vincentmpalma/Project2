@@ -123,6 +123,8 @@ public class MlbSearchActivity extends AppCompatActivity {
                     binding.myLayout.addView(divisionTextView);
                     binding.myLayout.addView(logoImageView);
                     binding.myLayout.addView(button);
+
+
                 }
             }
         };

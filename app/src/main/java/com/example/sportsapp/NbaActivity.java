@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,6 +59,16 @@ public class NbaActivity extends AppCompatActivity {
 
         loadData();
 
+        binding.favoriteAnNBATeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = NbaSearchActivity.nbaSearchIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 
     private void loadData() {
@@ -102,6 +113,110 @@ public class NbaActivity extends AppCompatActivity {
 
                             String homeDisplayName = homeTeamJSONObject.getString("displayName");
                             String awayDisplayName = awayTeamJSONObject.getString("displayName");
+
+                            String homeAbbreviation = homeTeamJSONObject.getString("abbreviation");
+                            String awayAbbreviation = awayTeamJSONObject.getString("abbreviation");
+
+                            JSONArray homeStatisticsArray = homeTeam.getJSONArray("statistics");
+                            JSONArray awayStatisticsArray = awayTeam.getJSONArray("statistics");
+
+
+                            String homeRebounds = "";
+                            String awayRebounds = "";
+
+                            String homeAssists = "";
+                            String awayAssists="";
+
+                            String homeFGA = "";
+                            String awayFGA="";
+
+                            String homeFGM = "";
+                            String awayFGM="";
+
+                            String homeFGP = "";
+                            String awayFGP="";
+
+                            String homeFTA = "";
+                            String awayFTA="";
+
+                            String homeFTM = "";
+                            String awayFTM="";
+
+                            String homeFTP = "";
+                            String awayFTP="";
+
+                            String homeTPA = "";
+                            String awayTPA="";
+
+                            String homeTPM = "";
+                            String awayTPM="";
+
+                            String homeTPP = "";
+                            String awayTPP="";
+
+
+
+                            for (int k = 0; k < homeStatisticsArray.length(); k++) {
+                                JSONObject homeStatObject = homeStatisticsArray.getJSONObject(k);
+                                JSONObject awayStatObject = awayStatisticsArray.getJSONObject(k);
+
+                                if(homeStatObject.getString("name").equals("rebounds")){
+                                    homeRebounds = homeStatObject.getString("displayValue");
+                                    awayRebounds = awayStatObject.getString("displayValue");
+                                }
+
+                                if(homeStatObject.getString("name").equals("assists")){
+                                    homeAssists = homeStatObject.getString("displayValue");
+                                    awayAssists = awayStatObject.getString("displayValue");
+                                }
+
+                                if(homeStatObject.getString("name").equals("fieldGoalsAttempted")){
+                                    homeFGA = homeStatObject.getString("displayValue");
+                                    awayFGA = awayStatObject.getString("displayValue");
+                                }
+
+                                if(homeStatObject.getString("name").equals("fieldGoalsMade")){
+                                    homeFGM = homeStatObject.getString("displayValue");
+                                    awayFGM = awayStatObject.getString("displayValue");
+                                }
+
+                                if(homeStatObject.getString("name").equals("fieldGoalPct")){
+                                    homeFGP = homeStatObject.getString("displayValue");
+                                    awayFGP = awayStatObject.getString("displayValue");
+                                }
+
+                                if(homeStatObject.getString("name").equals("freeThrowPct")){
+                                    homeFTP = homeStatObject.getString("displayValue");
+                                    awayFTP = awayStatObject.getString("displayValue");
+                                }
+
+                                if(homeStatObject.getString("name").equals("freeThrowsAttempted")){
+                                    homeFTA = homeStatObject.getString("displayValue");
+                                    awayFTA = awayStatObject.getString("displayValue");
+                                }
+
+                                if(homeStatObject.getString("name").equals("freeThrowsMade")){
+                                    homeFTM = homeStatObject.getString("displayValue");
+                                    awayFTM = awayStatObject.getString("displayValue");
+                                }
+
+                                if(homeStatObject.getString("name").equals("threePointPct")){
+                                    homeTPP = homeStatObject.getString("displayValue");
+                                    awayTPP = awayStatObject.getString("displayValue");
+                                }
+
+                                if(homeStatObject.getString("name").equals("threePointFieldGoalsAttempted")){
+                                    homeTPA = homeStatObject.getString("displayValue");
+                                    awayTPA = awayStatObject.getString("displayValue");
+                                }
+
+                                if(homeStatObject.getString("name").equals("threePointFieldGoalsMade")){
+                                    homeTPM = homeStatObject.getString("displayValue");
+                                    awayTPM = awayStatObject.getString("displayValue");
+                                }
+
+                            }
+
 
                             Log.i("NBA", homeDisplayName);
 
@@ -191,6 +306,36 @@ public class NbaActivity extends AppCompatActivity {
                             binding.myLayout.addView(linearLayout);
                             binding.myLayout.addView(timeLinearLayout);
                             binding.myLayout.addView(resultLinearLayout);
+
+                            String finalHomeRebounds = homeRebounds;
+                            String finalAwayRebounds = awayRebounds;
+                            String finalHomeAssists = homeAssists;
+                            String finalAwayAssists = awayAssists;
+                            String finalHomeFGA = homeFGA;
+                            String finalAwayFGA = awayFGA;
+                            String finalHomeFGM = homeFGM;
+                            String finalAwayFGM = awayFGM;
+                            String finalHomeFGP = homeFGP;
+                            String finalAwayFGP = awayFGP;
+                            String finalHomeFTA = homeFTA;
+                            String finalAwayFTA = awayFTA;
+                            String finalHomeFTM = homeFTM;
+                            String finalAwayFTM = awayFTM;
+                            String finalHomeFTP = homeFTP;
+                            String finalAwayFTP = awayFTP;
+                            String finalHomeTPA = homeTPA;
+                            String finalAwayTPA = awayTPA;
+                            String finalHomeTPM = homeTPM;
+                            String finalAwayTPM = awayTPM;
+                            String finalHomeTPP = homeTPP;
+                            String finalAwayTPP = awayTPP;
+                            resultLinearLayout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = nbaPopUpActivity.nbaPopUpIntentFactory(getApplicationContext(), homeAbbreviation, awayAbbreviation, homeLogoUrl, awayLogoUrl, homeScore, awayScore, finalHomeRebounds, finalAwayRebounds, finalHomeAssists, finalAwayAssists, finalHomeFGA, finalAwayFGA, finalHomeFGM, finalAwayFGM, finalHomeFGP, finalAwayFGP, finalHomeFTA, finalAwayFTA, finalHomeFTM, finalAwayFTM, finalHomeFTP, finalAwayFTP, finalHomeTPA, finalAwayTPA, finalHomeTPM, finalAwayTPM, finalHomeTPP, finalAwayTPP);
+                                    startActivity(intent);
+                                }
+                            });
 
 
                         }
