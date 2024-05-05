@@ -93,14 +93,22 @@ public class favortieTeams extends AppCompatActivity {
                             nameTextView.setTextSize(15);
                             nameTextView.setText(team.getFullName());
 //
-//                            TextView divisionTextView = new TextView(getApplicationContext());
-//                            divisionTextView.setLayoutParams(textParams);
-//                            divisionTextView.setTextSize(15);
-//                            divisionTextView.setText(team.getLeague() + " League " + team.getDivision());
+                            TextView divisionTextView = new TextView(getApplicationContext());
+                            divisionTextView.setLayoutParams(textParams);
+                            divisionTextView.setTextSize(10);
+                            divisionTextView.setText(team.getLeague() + " League " + team.getDivision());
+
+                            TextView locationTextView = new TextView(getApplicationContext());
+                            locationTextView.setLayoutParams(textParams);
+                            locationTextView.setTextSize(10);
+                            locationTextView.setText(team.getLocation());
+
 //
                             ImageView logoImageView = new ImageView(getApplicationContext());
                             logoImageView.setLayoutParams(imageParams);
                             Glide.with(getApplicationContext()).load(team.getLogo()).into(logoImageView);
+
+
 
 
                             Button button = new Button(getApplicationContext());
@@ -118,10 +126,12 @@ public class favortieTeams extends AppCompatActivity {
 
 
                             binding.myLayout.addView(nameTextView);
+                            binding.myLayout.addView(divisionTextView);
+                            binding.myLayout.addView(locationTextView);
                             binding.myLayout.addView(logoImageView);
                             binding.myLayout.addView(button);
 
-                            boolean teamIsPlaying = false;
+
 
                             String url = "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard";
 
@@ -197,20 +207,22 @@ public class favortieTeams extends AppCompatActivity {
                                                         resultString.append("Inning: ").append(inning).append("\n");
                                                     }
 
+                                                    int outs = 0;
                                                     StringBuilder gameTitleString = new StringBuilder(homeDisplayName + " vs " + awayDisplayName);
                                                     if (competition.has("situation")) {
                                                         JSONObject situation = competition.getJSONObject("situation");
                                                         if (situation.has("outs")) {
-                                                            int outs = situation.getInt("outs");
+                                                            outs = situation.getInt("outs");
 
 
                                                         }
                                                     }
+                                                    int finalOuts = outs;
 
                                                     logoImageView.setOnClickListener(new View.OnClickListener() {
                                                         @Override
                                                         public void onClick(View v) {
-                                                            Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors);
+                                                            Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors, isCompleted, inning,finalOuts,venue);
                                                             startActivity(intent);
                                                         }
                                                     });

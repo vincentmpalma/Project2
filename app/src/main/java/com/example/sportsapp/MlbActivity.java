@@ -137,6 +137,7 @@ public class MlbActivity extends AppCompatActivity {
 
 
 
+
                             JSONObject status = competition.getJSONObject("status");
                             JSONObject type = status.getJSONObject("type");
                             boolean isCompleted = type.getBoolean("completed");
@@ -208,27 +209,28 @@ public class MlbActivity extends AppCompatActivity {
 
 
 
-
+                            int outs = 0;
                             binding.myLayout.addView(gameTitleLinearLayout);
                             binding.myLayout.addView(linearLayout);
                             if(competition.has("situation")){
                                 JSONObject situation = competition.getJSONObject("situation");
                                 if(situation.has("outs")){
-                                    int outs = situation.getInt("outs");
-                                    TextView outsView = new TextView(getApplicationContext());
-                                    outsView.setLayoutParams(textParams);
-                                    outsView.setTextSize(15);
-                                    outsView.setText("Outs: " + outs);
-                                    binding.myLayout.addView(outsView);
+                                    outs = situation.getInt("outs");
+                                   // TextView outsView = new TextView(getApplicationContext());
+                                   // outsView.setLayoutParams(textParams);
+                                    //outsView.setTextSize(15);
+                                    //outsView.setText("Outs: " + outs);
+                                    //binding.myLayout.addView(outsView);
 
 
                                 }
                             }
 
+                            int finalOuts = outs;
                             resultLinearLayout.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors);
+                                    Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors, isCompleted, inning, finalOuts, venue);
                                     startActivity(intent);
                                 }
                             });

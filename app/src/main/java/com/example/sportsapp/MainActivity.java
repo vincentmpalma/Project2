@@ -93,13 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.nbaPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = NbaActivity.nbaIntentFactory(getApplicationContext(), loggedInUserId);
-                startActivity(intent);
-            }
-        });
+
         binding.MyDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

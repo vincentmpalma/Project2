@@ -16,8 +16,6 @@ public class SportsApp {
 
     private String favTeamAbv;
     private String league;
-    //private double firstNum;
-   // private int secondNum;
     private int userId;
 
     public SportsApp(String favTeamAbv, String league, int userId) {

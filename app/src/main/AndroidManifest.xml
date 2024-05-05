@@ -18,13 +18,6 @@
             android:name=".favortieTeams"
             android:exported="false" />
         <activity
-            android:name=".NbaSearchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".nbaPopUpActivity"
-            android:exported="false"
-            android:theme="@style/PopupActivityTheme" />
-        <activity
             android:name=".UserInfoActivity"
             android:exported="false" />
         <activity
@@ -45,9 +38,6 @@
             android:theme="@style/PopupActivityTheme" />
         <activity
             android:name=".MlbSearchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".NbaActivity"
             android:exported="false" />
         <activity
             android:name=".MlbActivity"

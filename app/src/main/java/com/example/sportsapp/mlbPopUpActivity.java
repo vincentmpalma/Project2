@@ -46,9 +46,12 @@ public class mlbPopUpActivity extends AppCompatActivity {
 
 
 
+
+
+
     }
 
-    static Intent mlbPopUpIntentFactory(Context context, String homeTeamName, String roadTeamName, String homeLogoUrl, String awayLogoUrl, String homeScore, String awayScore, String homeHits, String awayHits, String homeErrors, String awayErrors) {
+    static Intent mlbPopUpIntentFactory(Context context, String homeTeamName, String roadTeamName, String homeLogoUrl, String awayLogoUrl, String homeScore, String awayScore, String homeHits, String awayHits, String homeErrors, String awayErrors, Boolean isCompleted, int inning, int outs, String venue) {
         Intent intent = new Intent(context, mlbPopUpActivity.class);
         intent.putExtra("homeTeamName",homeTeamName);
         intent.putExtra("awayTeamName",roadTeamName);
@@ -60,6 +63,10 @@ public class mlbPopUpActivity extends AppCompatActivity {
         intent.putExtra("awayHits",awayHits);
         intent.putExtra("homeErrors", homeErrors);
         intent.putExtra("awayErrors", awayErrors);
+        intent.putExtra("isComplete", isCompleted);
+        intent.putExtra("inning", inning);
+        intent.putExtra("outs", outs);
+        intent.putExtra("venue",venue);
         return intent;
     }
 
@@ -81,6 +88,19 @@ public class mlbPopUpActivity extends AppCompatActivity {
 
         binding.homeErrors.setText(intent.getStringExtra("homeErrors"));
         binding.awayErrors.setText(intent.getStringExtra("awayErrors"));
+
+        Boolean isComplete = intent.getBooleanExtra("isComplete", true);
+        int inning = intent.getIntExtra("inning",9);
+
+        if(!isComplete){
+            binding.inningTextView.setText("INNING: " + inning);
+        }
+
+        int OUTS = intent.getIntExtra("outs", 0);
+        binding.outsView.setText("OUTS: " + OUTS);
+
+        binding.venueTextView.setText(intent.getStringExtra("venue"));
+
 
 
     }

@@ -40,13 +40,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        binding.nbaPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = NbaActivity.nbaIntentFactory(getApplicationContext(), loggedInUserId);
-                startActivity(intent);
-            }
-        });
+
     }
 
     static Intent searchIntentFactory(Context context) {

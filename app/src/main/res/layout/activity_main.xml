@@ -8,20 +8,20 @@
 
     <ImageView
         android:id="@+id/sportsAppLogo"
-        app:srcCompat="@drawable/sportsapp_logo"
         android:layout_width="375dp"
         android:layout_height="200dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sportsapp_logo" />
 
     <Button
         android:id="@+id/SearchButton"
         android:layout_width="390dp"
         android:layout_height="100dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/my_stats"
+        android:layout_marginTop="80dp"
+        android:text="Favorites"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
@@ -29,27 +29,28 @@
         app:layout_constraintTop_toBottomOf="@id/sportsAppLogo" />
 
     <Button
+        android:id="@+id/MyDeleteButton"
         android:layout_width="390dp"
         android:layout_height="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nbaPage"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
         android:text="@string/delete"
         android:textSize="36sp"
-        android:id="@+id/MyDeleteButton"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mlbPage" />
+
     <Button
+        android:id="@+id/adminPage"
         android:layout_width="390dp"
         android:layout_height="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nbaPage"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
         android:text="@string/admin_page"
         android:textSize="36sp"
-        android:id="@+id/adminPage"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mlbPage" />
 
     <Button
         android:layout_width="390dp"
@@ -61,18 +62,6 @@
         android:text="@string/mlb_scores"
         android:textSize="36sp"
         android:id="@+id/mlbPage"
-        />
-
-    <Button
-        android:layout_width="390dp"
-        android:layout_height="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mlbPage"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:text="@string/nba_scores"
-        android:textSize="36sp"
-        android:id="@+id/nbaPage"
         />
 
 
