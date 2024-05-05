@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/sportsAppLogo"
-        app:srcCompat="@drawable/mlb_logo"
+        app:srcCompat="@drawable/sportsapp_logo"
         android:layout_width="375dp"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"

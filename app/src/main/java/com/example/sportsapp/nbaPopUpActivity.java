@@ -34,6 +34,8 @@ public class nbaPopUpActivity extends AppCompatActivity {
 
         displayData();
 
+
+
     }
 
     public static Intent nbaPopUpIntentFactory(Context context, String homeTeamName, String roadTeamName, String homeLogoUrl, String awayLogoUrl, String homeScore, String awayScore, String homeRebounds, String awayRebounds, String homeAssists, String awayAssists, String homeFGA, String awayFGA, String homeFGM, String awayFGM, String homeFGP, String awayFGP, String homeFTA, String awayFTA, String homeFTM, String awayFTM, String homeFTP, String awayFTP, String homeTPA, String awayTPA, String homeTPM, String awayTPM, String homeTPP, String awayTPP ) {
