@@ -112,7 +112,7 @@ public class MlbSearchActivity extends AppCompatActivity {
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(MlbSearchActivity.this, team.getTeamName(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MlbSearchActivity.this, "Favorited " + team.getTeamName(), Toast.LENGTH_SHORT).show();
                             repository.insertSportsApp(new SportsApp(team.getAcronym(),"MLB", loggedInUserId));
                         }
                     });

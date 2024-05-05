@@ -6,16 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/sportsAppLogo"
+        app:srcCompat="@drawable/mlb_logo"
+        android:layout_width="375dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/SearchButton"
         android:layout_width="390dp"
         android:layout_height="100dp"
+        android:layout_marginTop="36dp"
         android:text="@string/my_stats"
         android:textSize="36sp"
-        android:layout_marginTop="125dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/sportsAppLogo" />
 
     <Button
         android:layout_width="390dp"

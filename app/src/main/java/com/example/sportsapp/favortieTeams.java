@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,12 +22,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.sportsapp.database.SportsAppRepository;
 import com.example.sportsapp.database.entities.MlbTeam;
 import com.example.sportsapp.database.entities.SportsApp;
 import com.example.sportsapp.database.entities.User;
 import com.example.sportsapp.databinding.ActivityFavortieTeamsBinding;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +65,8 @@ public class favortieTeams extends AppCompatActivity {
         displayTeams();
     }
 
-    private void displayTeams(){
+    private void displayTeams() {
         ArrayList<SportsApp> list = repository.getAllLogsByUserId(loggedInUserId);
-
 
 
         LiveData<List<MlbTeam>> teamObserver = repository.getAllMlbTeams(); //live data
@@ -74,9 +82,9 @@ public class favortieTeams extends AppCompatActivity {
                 for (MlbTeam team : mlbTeams) {
                     //binding.textView.setText(binding.textView.getText().toString() + " " + team.getTeamName());
 
-                    for(int i = 0; i < list.size(); i++) {
+                    for (int i = 0; i < list.size(); i++) {
 
-                        if(team.getAcronym().equalsIgnoreCase(list.get(i).getFavTeamAbv())) {
+                        if (team.getAcronym().equalsIgnoreCase(list.get(i).getFavTeamAbv())) {
 
                             test += team.getAcronym();
 
@@ -93,12 +101,141 @@ public class favortieTeams extends AppCompatActivity {
                             ImageView logoImageView = new ImageView(getApplicationContext());
                             logoImageView.setLayoutParams(imageParams);
                             Glide.with(getApplicationContext()).load(team.getLogo()).into(logoImageView);
-//
-//
+
+
+                            Button button = new Button(getApplicationContext());
+                            button.setText("Unfavorite");
+                            button.setLayoutParams(buttonParams);
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Toast.makeText(favortieTeams.this, "Deleted " + team.getTeamName(), Toast.LENGTH_SHORT).show();
+                                    repository.deleteTeam(loggedInUserId, team.getAcronym().toUpperCase());
+                                    clearLayout();
+                                    displayTeams();
+                                }
+                            });
+
+
                             binding.myLayout.addView(nameTextView);
-//                            binding.myLayout.addView(divisionTextView);
                             binding.myLayout.addView(logoImageView);
-//                            binding.myLayout.addView(button);
+                            binding.myLayout.addView(button);
+
+                            boolean teamIsPlaying = false;
+
+                            String url = "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard";
+
+                            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        JSONArray eventsArray = response.getJSONArray("events");
+                                        StringBuilder resultBuilder = new StringBuilder();
+
+                                        for (int i = 0; i < eventsArray.length(); i++) {
+                                            JSONObject eventObject = eventsArray.getJSONObject(i);
+                                            JSONArray competitionsArray = eventObject.getJSONArray("competitions");
+
+                                            for (int j = 0; j < competitionsArray.length(); j++) {
+                                                JSONObject competition = competitionsArray.getJSONObject(j);
+                                                JSONArray competitorsArray = competition.getJSONArray("competitors");
+
+
+                                                JSONObject venueObject = competition.getJSONObject("venue");
+                                                String venue = venueObject.getString("fullName");
+                                                JSONObject address = venueObject.getJSONObject("address");
+
+
+                                                JSONObject homeTeam = competitorsArray.getJSONObject(0);
+                                                JSONObject awayTeam = competitorsArray.getJSONObject(1);
+
+                                                JSONObject homeTeamJSONObject = homeTeam.getJSONObject("team");
+                                                JSONObject awayTeamJSONObject = awayTeam.getJSONObject("team");
+
+
+                                                String homeDisplayName = homeTeamJSONObject.getString("displayName");
+                                                String awayDisplayName = awayTeamJSONObject.getString("displayName");
+
+                                                String homeScore = homeTeam.getString("score");
+                                                String awayScore = awayTeam.getString("score");
+
+                                                String homeName = homeTeamJSONObject.getString("abbreviation");
+                                                String awayName = awayTeamJSONObject.getString("abbreviation");
+
+                                                if (homeName.equalsIgnoreCase(team.getAcronym()) || awayName.equalsIgnoreCase(team.getAcronym())) {
+
+                                                    String homeHits = homeTeam.getString("hits");
+                                                    String awayHits = awayTeam.getString("hits");
+
+                                                    String homeErrors = homeTeam.getString("errors");
+                                                    String awayErrors = awayTeam.getString("errors");
+
+
+                                                    JSONObject status = competition.getJSONObject("status");
+                                                    JSONObject type = status.getJSONObject("type");
+                                                    boolean isCompleted = type.getBoolean("completed");
+                                                    int inning = status.getInt("period");
+
+                                                    String homeLogoUrl = homeTeamJSONObject.getString("logo"); // Assuming 'logo' is the key for the logo URL
+                                                    String awayLogoUrl = awayTeamJSONObject.getString("logo");
+
+                                                    ImageView homeImageView = new ImageView(getApplicationContext());
+                                                    homeImageView.setLayoutParams(imageParams);
+
+
+                                                    ImageView roadImageView = new ImageView(getApplicationContext());
+                                                    roadImageView.setLayoutParams(imageParams);
+
+                                                    Glide.with(getApplicationContext()).load(homeLogoUrl).into(homeImageView);
+                                                    Glide.with(getApplicationContext()).load(awayLogoUrl).into(roadImageView);
+
+                                                    StringBuilder resultString = new StringBuilder();
+
+                                                    if (isCompleted) {
+                                                        resultString.append("FINAL").append("\n");
+                                                    } else {
+                                                        resultString.append("Inning: ").append(inning).append("\n");
+                                                    }
+
+                                                    StringBuilder gameTitleString = new StringBuilder(homeDisplayName + " vs " + awayDisplayName);
+                                                    if (competition.has("situation")) {
+                                                        JSONObject situation = competition.getJSONObject("situation");
+                                                        if (situation.has("outs")) {
+                                                            int outs = situation.getInt("outs");
+
+
+                                                        }
+                                                    }
+
+                                                    logoImageView.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors);
+                                                            startActivity(intent);
+                                                        }
+                                                    });
+
+                                                }
+
+                                            }
+
+                                        }
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    //movieData.setValue("Error occurred.");
+                                }
+                            });
+
+                            //Volley.newRequestQueue(this).add(request);
+                            Volley.newRequestQueue(getApplicationContext()).add(request);
+
                         }
                     }
                 }
@@ -110,7 +247,7 @@ public class favortieTeams extends AppCompatActivity {
 
     }
 
-    public static Intent favoriteTeamsIntentFactory(Context context){
+    public static Intent favoriteTeamsIntentFactory(Context context) {
         Intent intent = new Intent(context, favortieTeams.class);
         return intent;
     }
@@ -207,5 +344,13 @@ public class favortieTeams extends AppCompatActivity {
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit(); //make it editable
         sharedPrefEditor.putInt(getString(R.string.preference_user_Id_key), loggedInUserId); //putting key and the corresponding value (LOGGED_OUT here for his logout function
         sharedPrefEditor.apply(); //apply changes
+    }
+
+    private void clearLayout() {
+        int childCount = binding.myLayout.getChildCount();
+        for (int i = childCount - 1; i >= 0; i--) {
+            View childView = binding.myLayout.getChildAt(i);
+            binding.myLayout.removeView(childView);
+        }
     }
 }

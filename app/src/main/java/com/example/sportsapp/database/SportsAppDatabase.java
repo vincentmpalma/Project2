@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 
 //this class represents actual database, where our information is stored
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {SportsApp.class, User.class, MlbTeam.class}, version = 2, exportSchema = false)
+@Database(entities = {SportsApp.class, User.class, MlbTeam.class}, version = 3, exportSchema = false)
 public abstract class SportsAppDatabase extends RoomDatabase {
 
     public static  final String MLB_TABLE = "mlbtable";

@@ -93,6 +93,16 @@ public class SportsAppRepository {
     }
 
 
+    public void deleteTeam(int userId, String teamAbv) {
+        SportsAppDatabase.databaseWriteExecutor.execute(()->
+        {
+            sportsAppDAO.deleteTeam(userId, teamAbv);
+        });
+    }
+
+
+
+
     public LiveData<User> getUserByUserName(String username) {
         return userDAO.getUserByUserName(username);
     }
