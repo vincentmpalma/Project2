@@ -93,6 +93,16 @@ public class SportsAppRepository {
     }
 
 
+    public void deleteTeam(int userId, String teamAbv) {
+        SportsAppDatabase.databaseWriteExecutor.execute(()->
+        {
+            sportsAppDAO.deleteTeam(userId, teamAbv);
+        });
+    }
+
+
+
+
     public LiveData<User> getUserByUserName(String username) {
         return userDAO.getUserByUserName(username);
     }
@@ -109,9 +119,13 @@ public class SportsAppRepository {
         return mlbDAO.getAllTeams();
     }
 
+
+
     public LiveData<List<MlbTeam>>getTeamsBySearch(String search){
         return mlbDAO.getTeamsBySearch(search);
     }
+
+
 
     public void insertMlbTeam(MlbTeam... mlbteam){
         SportsAppDatabase.databaseWriteExecutor.execute(()->
@@ -119,6 +133,7 @@ public class SportsAppRepository {
             mlbDAO.insert(mlbteam);
         });
     }
+
 
     public ArrayList<SportsApp> getAllLogsByUserId(int loggedInUserId) {
         //Future of an ArrayList of SportsApp (2ill have future values)

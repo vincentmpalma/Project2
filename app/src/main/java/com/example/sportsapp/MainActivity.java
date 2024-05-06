@@ -93,17 +93,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.nbaPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = NbaActivity.nbaIntentFactory(getApplicationContext(), loggedInUserId);
-                startActivity(intent);
-            }
-        });
+
         binding.MyDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = DeleteActivity.deleteActivityIntentFactory(getApplicationContext(),loggedInUserId);
+                startActivity(intent);
+            }
+        });
+
+
+        binding.SearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = favortieTeams.favoriteTeamsIntentFactory(getApplicationContext());
                 startActivity(intent);
             }
         });
@@ -239,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        SportsApp app = new SportsApp(mLeague, loggedInUserId); //,make a new POJO
+        SportsApp app = new SportsApp("AAA", "SomethingLB", loggedInUserId); //,make a new POJO
         repository.insertSportsApp(app); //inserting pojo we just created into the database through the repo
     }
 

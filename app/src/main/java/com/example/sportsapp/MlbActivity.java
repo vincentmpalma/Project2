@@ -113,6 +113,11 @@ public class MlbActivity extends AppCompatActivity {
                             JSONArray competitorsArray = competition.getJSONArray("competitors");
 
 
+                            JSONObject venueObject = competition.getJSONObject("venue");
+                            String venue = venueObject.getString("fullName");
+                            JSONObject address = venueObject.getJSONObject("address");
+
+
                             JSONObject homeTeam = competitorsArray.getJSONObject(0);
                             JSONObject awayTeam = competitorsArray.getJSONObject(1);
 
@@ -134,6 +139,9 @@ public class MlbActivity extends AppCompatActivity {
 
                             String homeErrors = homeTeam.getString("errors");
                             String awayErrors = awayTeam.getString("errors");
+
+
+
 
 
 
@@ -171,13 +179,10 @@ public class MlbActivity extends AppCompatActivity {
                             gameTitleTextView.setGravity(Gravity.CENTER);
                             gameTitleTextView.setText(gameTitleString);
 
-                            gameTitleTextView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors);
-                                    startActivity(intent);
-                                }
-                            });
+
+
+
+
 
 
                             TextView textView = new TextView(getApplicationContext());
@@ -210,9 +215,38 @@ public class MlbActivity extends AppCompatActivity {
 
 
 
+
+                            int outs = 0;
                             binding.myLayout.addView(gameTitleLinearLayout);
                             binding.myLayout.addView(linearLayout);
+                            if(competition.has("situation")){
+                                JSONObject situation = competition.getJSONObject("situation");
+                                if(situation.has("outs")){
+                                    outs = situation.getInt("outs");
+                                   // TextView outsView = new TextView(getApplicationContext());
+                                   // outsView.setLayoutParams(textParams);
+                                    //outsView.setTextSize(15);
+                                    //outsView.setText("Outs: " + outs);
+                                    //binding.myLayout.addView(outsView);
+
+
+                                }
+                            }
+
+                            int finalOuts = outs;
+                            resultLinearLayout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors, isCompleted, inning, finalOuts, venue);
+                                    startActivity(intent);
+                                }
+                            });
+
+
+
                             binding.myLayout.addView(resultLinearLayout);
+
+
 
                         }
 

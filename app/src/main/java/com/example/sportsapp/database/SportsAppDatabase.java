@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 
 //this class represents actual database, where our information is stored
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {SportsApp.class, User.class, MlbTeam.class}, version = 1, exportSchema = false)
+@Database(entities = {SportsApp.class, User.class, MlbTeam.class}, version = 3, exportSchema = false)
 public abstract class SportsAppDatabase extends RoomDatabase {
 
     public static  final String MLB_TABLE = "mlbtable";
@@ -78,71 +78,71 @@ public abstract class SportsAppDatabase extends RoomDatabase {
 
                 MlbDAO mlbdao = INSTANCE.mlbDAO();
                 mlbdao.deleteAll();
-                MlbTeam mlbTeam = new MlbTeam("Chicago White Sox", "White Sox", "Chicago", "CHW", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png", "American", "Central");
+                MlbTeam mlbTeam = new MlbTeam("Chicago White Sox", "White Sox", "Guaranteed Rate Field", "CHW", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png", "American", "Central");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Cleveland Guardians", "Guardians", "Cleveland", "CLE", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png", "American", "Central");
+                mlbTeam = new MlbTeam("Cleveland Guardians", "Guardians", "Progressive Field", "CLE", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png", "American", "Central");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Detroit Tigers", "Tigers", "Detroit", "DET", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/det.png", "American", "Central");
+                mlbTeam = new MlbTeam("Detroit Tigers", "Tigers", "Comerica Park", "DET", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/det.png", "American", "Central");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Minnesota Twins", "Twins", "Minnesota", "MIN", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/min.png", "American", "Central");
+                mlbTeam = new MlbTeam("Minnesota Twins", "Twins", "Target Field", "MIN", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/min.png", "American", "Central");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Kansas City Royals", "Royals", "Kansas City", "KC", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png", "American", "Central");
-                mlbdao.insert(mlbTeam);
-
-
-                mlbTeam = new MlbTeam("Baltimore Orioles", "Orioles", "Baltimore", "BAL", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bal.png", "American", "East");
-                mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Boston Red Sox", "Red Sox", "Boston", "BOS", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png", "American", "East");
-                mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("New York Yankees", "Yankees", "New York", "NYY", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png", "American", "East");
-                mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Tampa Bay Rays", "Rays", "Tampa Bay", "TB", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png", "American", "East");
-                mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Toronto Blue Jays", "Blue Jays", "Toronto", "TOR", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tor.png", "American", "East");
+                mlbTeam = new MlbTeam("Kansas City Royals", "Royals", "Kauffman Stadium", "KC", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png", "American", "Central");
                 mlbdao.insert(mlbTeam);
 
-                mlbTeam = new MlbTeam("Houston Astros", "Astros", "Houston", "HOU", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png", "American", "West");
+
+                mlbTeam = new MlbTeam("Baltimore Orioles", "Orioles", "Oriole Park at Camden Yards", "BAL", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bal.png", "American", "East");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Los Angeles Angels", "Angels", "Los Angeles", "LAA", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png", "American", "West");
+                mlbTeam = new MlbTeam("Boston Red Sox", "Red Sox", "Fenway Park", "BOS", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png", "American", "East");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Oakland Athletics", "Athletics", "Oakland", "OAK", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/oak.png", "American", "West");
+                mlbTeam = new MlbTeam("New York Yankees", "Yankees", "Yankee Stadium", "NYY", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png", "American", "East");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Seattle Mariners", "Mariners", "Seattle", "SEA", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png", "American", "West");
+                mlbTeam = new MlbTeam("Tampa Bay Rays", "Rays", "Tropicana Field", "TB", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png", "American", "East");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Texas Rangers", "Rangers", "Texas", "TEX", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png", "American", "West");
+                mlbTeam = new MlbTeam("Toronto Blue Jays", "Blue Jays", "Rogers Centre", "TOR", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tor.png", "American", "East");
                 mlbdao.insert(mlbTeam);
 
-                mlbTeam = new MlbTeam("Chicago Cubs", "Cubs", "Chicago", "CHC", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png", "National", "Central");
+                mlbTeam = new MlbTeam("Houston Astros", "Astros", "Minute Maid Park", "HOU", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png", "American", "West");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Cincinnati Reds", "Reds", "Cincinnati", "CIN", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png", "National", "Central");
+                mlbTeam = new MlbTeam("Los Angeles Angels", "Angels", "Angel Stadium", "LAA", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png", "American", "West");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Milwaukee Brewers", "Brewers", "Milwaukee", "MIL", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png", "National", "Central");
+                mlbTeam = new MlbTeam("Oakland Athletics", "Athletics", "Oakland Coliseum", "OAK", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/oak.png", "American", "West");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Pittsburgh Pirates", "Pirates", "Pittsburgh", "PIT", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png", "National", "Central");
+                mlbTeam = new MlbTeam("Seattle Mariners", "Mariners", "T-Mobile Park", "SEA", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png", "American", "West");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("St. Louis Cardinals", "Cardinals", "St. Louis", "STL", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png", "National", "Central");
-                mlbdao.insert(mlbTeam);
-
-                mlbTeam = new MlbTeam("Atlanta Braves", "Braves", "Atlanta", "ATL", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png", "National", "East");
-                mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Miami Marlins", "Marlins", "Miami", "MIA", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png", "National", "East");
-                mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("New York Mets", "Mets", "New York", "NYM", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png", "National", "East");
-                mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Philadelphia Phillies", "Phillies", "Philadelphia", "PHI", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png", "National", "East");
-                mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Washington Nationals", "Nationals", "Washington", "WSH", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/wsh.png", "National", "East");
+                mlbTeam = new MlbTeam("Texas Rangers", "Rangers", "Globe Life Field", "TEX", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png", "American", "West");
                 mlbdao.insert(mlbTeam);
 
-                mlbTeam = new MlbTeam("Arizona Diamondbacks", "Diamondbacks", "Arizona", "ARI", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png", "National", "West");
+                mlbTeam = new MlbTeam("Chicago Cubs", "Cubs", "Wrigley Field", "CHC", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png", "National", "Central");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Colorado Rockies", "Rockies", "Colorado", "COL", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png", "National", "West");
+                mlbTeam = new MlbTeam("Cincinnati Reds", "Reds", "Great American Ball Park", "CIN", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png", "National", "Central");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("Los Angeles Dodgers", "Dodgers", "Los Angeles", "LAD", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/LAD.png", "National", "West");
+                mlbTeam = new MlbTeam("Milwaukee Brewers", "Brewers", "American Family Field", "MIL", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png", "National", "Central");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("San Diego Padres", "Padres", "San Diego", "SD", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png", "National", "West");
+                mlbTeam = new MlbTeam("Pittsburgh Pirates", "Pirates", "PNC Park", "PIT", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png", "National", "Central");
                 mlbdao.insert(mlbTeam);
-                mlbTeam = new MlbTeam("San Francisco Giants", "Giants", "San Francisco", "SF", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sf.png", "National", "West");
+                mlbTeam = new MlbTeam("St. Louis Cardinals", "Cardinals", "Busch Stadium", "STL", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png", "National", "Central");
+                mlbdao.insert(mlbTeam);
+
+                mlbTeam = new MlbTeam("Atlanta Braves", "Braves", "Truist Park", "ATL", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png", "National", "East");
+                mlbdao.insert(mlbTeam);
+                mlbTeam = new MlbTeam("Miami Marlins", "Marlins", "LoanDepot Park", "MIA", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png", "National", "East");
+                mlbdao.insert(mlbTeam);
+                mlbTeam = new MlbTeam("New York Mets", "Mets", "Citi Field", "NYM", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png", "National", "East");
+                mlbdao.insert(mlbTeam);
+                mlbTeam = new MlbTeam("Philadelphia Phillies", "Phillies", "Citizens Bank Park", "PHI", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png", "National", "East");
+                mlbdao.insert(mlbTeam);
+                mlbTeam = new MlbTeam("Washington Nationals", "Nationals", "Nationals Park", "WSH", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/wsh.png", "National", "East");
+                mlbdao.insert(mlbTeam);
+
+                mlbTeam = new MlbTeam("Arizona Diamondbacks", "Diamondbacks", "Chase Field", "ARI", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png", "National", "West");
+                mlbdao.insert(mlbTeam);
+                mlbTeam = new MlbTeam("Colorado Rockies", "Rockies", "Coors Field", "COL", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png", "National", "West");
+                mlbdao.insert(mlbTeam);
+                mlbTeam = new MlbTeam("Los Angeles Dodgers", "Dodgers", "Dodger Stadium", "LAD", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/LAD.png", "National", "West");
+                mlbdao.insert(mlbTeam);
+                mlbTeam = new MlbTeam("San Diego Padres", "Padres", "Petco Park", "SD", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png", "National", "West");
+                mlbdao.insert(mlbTeam);
+                mlbTeam = new MlbTeam("San Francisco Giants", "Giants", "Oracle Park", "SF", "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sf.png", "National", "West");
                 mlbdao.insert(mlbTeam);
             });
         }

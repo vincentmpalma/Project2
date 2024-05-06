@@ -14,23 +14,20 @@ public class SportsApp {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String favLeague;
-    //private double firstNum;
-   // private int secondNum;
-    private LocalDateTime date;
+    private String favTeamAbv;
+    private String league;
     private int userId;
 
-    public SportsApp(String favLeague, int userId) {
-        this.favLeague = favLeague;
+    public SportsApp(String favTeamAbv, String league, int userId) {
+        this.favTeamAbv = favTeamAbv;
+        this.league = league;
         this.userId = userId;
-        date = LocalDateTime.now();
     }
 
     @NonNull
     @Override
     public String toString() {
-        return  favLeague + '\n' +
-                "Date = " + date.toString() + '\n' +
+        return  favTeamAbv + '\n' +
                 "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
     }
 
@@ -39,12 +36,12 @@ public class SportsApp {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SportsApp sportsApp = (SportsApp) o;
-        return id == sportsApp.id && userId == sportsApp.userId && Objects.equals(favLeague, sportsApp.favLeague) && Objects.equals(date, sportsApp.date);
+        return id == sportsApp.id && userId == sportsApp.userId && Objects.equals(favTeamAbv, sportsApp.favTeamAbv) && Objects.equals(league, sportsApp.league);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, favLeague, date, userId);
+        return Objects.hash(id, favTeamAbv, league, userId);
     }
 
     public int getId() {
@@ -55,20 +52,20 @@ public class SportsApp {
         this.id = id;
     }
 
-    public String getFavLeague() {
-        return favLeague;
+    public String getFavTeamAbv() {
+        return favTeamAbv;
     }
 
-    public void setFavLeague(String favLeague) {
-        this.favLeague = favLeague;
+    public void setFavTeamAbv(String favTeamAbv) {
+        this.favTeamAbv = favTeamAbv;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public String getLeague() {
+        return league;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setLeague(String league) {
+        this.league = league;
     }
 
     public int getUserId() {
@@ -78,4 +75,6 @@ public class SportsApp {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+
 }

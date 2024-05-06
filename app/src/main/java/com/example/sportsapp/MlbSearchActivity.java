@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -27,6 +29,7 @@ import androidx.lifecycle.Observer;
 import com.bumptech.glide.Glide;
 import com.example.sportsapp.database.SportsAppRepository;
 import com.example.sportsapp.database.entities.MlbTeam;
+import com.example.sportsapp.database.entities.SportsApp;
 import com.example.sportsapp.database.entities.User;
 import com.example.sportsapp.databinding.ActivityMlbSearchBinding;
 
@@ -35,13 +38,16 @@ import java.util.List;
 
 
 public class MlbSearchActivity extends AppCompatActivity {
-    private static final String MLB_SEARCH_ACTIVITY_USER_ID = "com.example.sportsapp.MLB_SEARCH_ACTIVITY_USER_ID";
+
+    private static final String MLB_ACTIVITY_USER_ID = "com.example.sportsapp.MAIN_ACTIVITY_USER_ID";
+    static final String SHARED_PREFERENCE_USERID_KEY = "com.example.sportsapp.SHARED_PREFERENCE_USERID_KEY";
     static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.sportsapp.SAVED_INSTANCE_STATE_USERID_KEY";
-    private int loggedInUserId = -1;
     private static final int LOGGED_OUT = -1;
-    ActivityMlbSearchBinding binding;
+    private int loggedInUserId = -1;
     private SportsAppRepository repository;
-    User user;
+    private User user;
+
+    ActivityMlbSearchBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +109,13 @@ public class MlbSearchActivity extends AppCompatActivity {
 
                     Button button = new Button(getApplicationContext());
                     button.setText("Favorite");
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MlbSearchActivity.this, "Favorited " + team.getTeamName(), Toast.LENGTH_SHORT).show();
+                            repository.insertSportsApp(new SportsApp(team.getAcronym(),"MLB", loggedInUserId));
+                        }
+                    });
                     button.setLayoutParams(buttonParams);
 
 
@@ -112,6 +125,8 @@ public class MlbSearchActivity extends AppCompatActivity {
                     binding.myLayout.addView(divisionTextView);
                     binding.myLayout.addView(logoImageView);
                     binding.myLayout.addView(button);
+
+
                 }
             }
         };
@@ -149,7 +164,16 @@ public class MlbSearchActivity extends AppCompatActivity {
 
                     Button button = new Button(getApplicationContext());
                     button.setText("Favorite");
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MlbSearchActivity.this, team.getTeamName(), Toast.LENGTH_SHORT).show();
+                            repository.insertSportsApp(new SportsApp(team.getAcronym(),"MLB", loggedInUserId));
+                        }
+                    });
                     button.setLayoutParams(buttonParams);
+
+
 
 
 
@@ -171,6 +195,7 @@ public class MlbSearchActivity extends AppCompatActivity {
             binding.myLayout.removeView(childView);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -182,7 +207,7 @@ public class MlbSearchActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.logoutMenuItem);
         item.setVisible(true);
-        if(user == null){
+        if (user == null) {
             return false;
         }
         item.setTitle(user.getUsername()); //what is displayed in the menu
@@ -200,7 +225,7 @@ public class MlbSearchActivity extends AppCompatActivity {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MlbSearchActivity.this);
         final AlertDialog alertDialog = alertBuilder.create();
 
-        alertBuilder.setMessage("Logout?");
+        alertDialog.setMessage("Logout?");
 
         alertBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
             @Override
@@ -215,27 +240,19 @@ public class MlbSearchActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
-        alertBuilder.setNeutralButton("Back", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                backup();
-            }
-        });
 
         alertBuilder.create().show();
     }
-    private void backup() {
-        getIntent().putExtra(MLB_SEARCH_ACTIVITY_USER_ID,loggedInUserId);
-        startActivity(MlbActivity.mlbIntentFactory(getApplicationContext(),loggedInUserId));
-    }
+
     private void logout() {
 
         loggedInUserId = LOGGED_OUT;
         updateSharedPreference();
-        getIntent().putExtra(MLB_SEARCH_ACTIVITY_USER_ID, loggedInUserId);
+        getIntent().putExtra(MLB_ACTIVITY_USER_ID, loggedInUserId);
 
         startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
     }
+
     private void loginUser(Bundle savedInstanceState) {
         //checked shared preference for logged in user
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -249,7 +266,7 @@ public class MlbSearchActivity extends AppCompatActivity {
         }
 
         if (loggedInUserId == LOGGED_OUT) {
-            loggedInUserId = getIntent().getIntExtra(MLB_SEARCH_ACTIVITY_USER_ID, LOGGED_OUT);
+            loggedInUserId = getIntent().getIntExtra(MLB_ACTIVITY_USER_ID, LOGGED_OUT);
         }
 
         if (loggedInUserId == LOGGED_OUT) {
