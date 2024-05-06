@@ -62,20 +62,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         updateSharedPreference();
-
-        //binding.sportsAppDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
         updateDisplay();
-
-
-
-        //binding.logButton.setOnClickListener(new View.OnClickListener() { //making on click listener for Submit button
-        //    @Override
-        //    public void onClick(View v) {
-        //        getInfoFromDisplay(); //gets values from edit text and stores them in m variables
-        //        insertSportsAppRecord(); //insert records from inputs into the database
-        //       updateDisplay(); //updates the display
-        //    }
-        //});
 
         binding.adminPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,14 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        //dont know why he did this, can prob just comment it out
-        //binding.favLeagueInputEditText.setOnClickListener(new View.OnClickListener() {
-         //   @Override
-           /// public void onClick(View v) {
-              //  updateDisplay();
-           // }
-        //});
 
     }
 
@@ -249,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateDisplay() {
         ArrayList<SportsApp> allLogs = repository.getAllLogsByUserId(loggedInUserId);
         if (allLogs.isEmpty()) {
-            //binding.sportsAppDisplayTextView.setText(R.string.nothing_to_show);
+
         } else {
 
             StringBuilder sb = new StringBuilder();
@@ -257,29 +236,10 @@ public class MainActivity extends AppCompatActivity {
                 sb.append(app);
             }
 
-           // binding.sportsAppDisplayTextView.setText(sb.toString());
+
 
         }
-        //String currentInfo = binding.sportsAppDisplayTextView.getText().toString();
-        //String newDisplay = String.format(Locale.US, "Favorite League:%s%nFirstDouble:%.2f%nSecondInt:%d%n=-=-=-=-=-=%n%s", mLeague, mFirstInt,mSecondInt,currentInfo);
-        //binding.sportsAppDisplayTextView.setText(newDisplay);
-        //Log.i(TAG, repository.getAllLogs().toString());
+
     }
 
-//    private void getInfoFromDisplay() {
-//        mLeague = binding.favLeagueInputEditText.getText().toString();
-
-//        try {
-//            mFirstInt = Double.parseDouble(binding.integerInputEditText.getText().toString());
-//        } catch (NumberFormatException e) {
-//            Log.d(TAG, "Error reading value from first int edit text.");
-//        }
-//
-//        try {
-//            mSecondInt = Integer.parseInt(binding.doubleInputEditText.getText().toString());
-//        } catch (NumberFormatException e) {
-//            Log.d(TAG, "Error reading value from second int edit text.");
-//        }
-
-  //  }
 }
