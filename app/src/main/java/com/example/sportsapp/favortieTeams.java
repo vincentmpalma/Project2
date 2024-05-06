@@ -80,7 +80,7 @@ public class favortieTeams extends AppCompatActivity {
                 buttonParams.bottomMargin = 100;
                 String test = "";
                 for (MlbTeam team : mlbTeams) {
-                    //binding.textView.setText(binding.textView.getText().toString() + " " + team.getTeamName());
+
 
                     for (int i = 0; i < list.size(); i++) {
 
@@ -109,8 +109,6 @@ public class favortieTeams extends AppCompatActivity {
                             Glide.with(getApplicationContext()).load(team.getLogo()).into(logoImageView);
 
 
-
-
                             Button button = new Button(getApplicationContext());
                             button.setText("Unfavorite");
                             button.setLayoutParams(buttonParams);
@@ -130,7 +128,6 @@ public class favortieTeams extends AppCompatActivity {
                             binding.myLayout.addView(locationTextView);
                             binding.myLayout.addView(logoImageView);
                             binding.myLayout.addView(button);
-
 
 
                             String url = "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard";
@@ -213,8 +210,6 @@ public class favortieTeams extends AppCompatActivity {
                                                         JSONObject situation = competition.getJSONObject("situation");
                                                         if (situation.has("outs")) {
                                                             outs = situation.getInt("outs");
-
-
                                                         }
                                                     }
                                                     int finalOuts = outs;
@@ -222,15 +217,12 @@ public class favortieTeams extends AppCompatActivity {
                                                     logoImageView.setOnClickListener(new View.OnClickListener() {
                                                         @Override
                                                         public void onClick(View v) {
-                                                            Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors, isCompleted, inning,finalOuts,venue);
+                                                            Intent intent = mlbPopUpActivity.mlbPopUpIntentFactory(getApplicationContext(), homeName, awayName, homeLogoUrl, awayLogoUrl, homeScore, awayScore, homeHits, awayHits, homeErrors, awayErrors, isCompleted, inning, finalOuts, venue);
                                                             startActivity(intent);
                                                         }
                                                     });
-
                                                 }
-
                                             }
-
                                         }
 
                                     } catch (Exception e) {
@@ -241,17 +233,16 @@ public class favortieTeams extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    //movieData.setValue("Error occurred.");
+
                                 }
                             });
 
-                            //Volley.newRequestQueue(this).add(request);
                             Volley.newRequestQueue(getApplicationContext()).add(request);
 
                         }
                     }
                 }
-                //binding.textView3.setText(test);
+
             }
         };
 
@@ -319,9 +310,10 @@ public class favortieTeams extends AppCompatActivity {
 
         alertBuilder.create().show();
     }
+
     private void backup() {
-        getIntent().putExtra(FAVORITE_TEAMS_ACTIVITY_USER_ID,loggedInUserId);
-        startActivity(MlbActivity.mlbIntentFactory(getApplicationContext(),loggedInUserId));
+        getIntent().putExtra(FAVORITE_TEAMS_ACTIVITY_USER_ID, loggedInUserId);
+        startActivity(MlbActivity.mlbIntentFactory(getApplicationContext(), loggedInUserId));
     }
 
     private void logout() {
