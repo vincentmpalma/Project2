@@ -76,7 +76,7 @@ public class MlbActivity extends AppCompatActivity {
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = SearchActivity.searchIntentFactory(getApplicationContext());
+                Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
                 startActivity(intent);
             }
         });

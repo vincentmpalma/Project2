@@ -225,7 +225,7 @@ public class MlbSearchActivity extends AppCompatActivity {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MlbSearchActivity.this);
         final AlertDialog alertDialog = alertBuilder.create();
 
-        alertDialog.setMessage("Logout?");
+        alertBuilder.setMessage("Logout?");
 
         alertBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
             @Override
@@ -240,8 +240,18 @@ public class MlbSearchActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
+        alertBuilder.setNeutralButton("Back", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                backup();
+            }
+        });
 
         alertBuilder.create().show();
+    }
+    private void backup() {
+        getIntent().putExtra(MLB_ACTIVITY_USER_ID,loggedInUserId);
+        startActivity(MlbActivity.mlbIntentFactory(getApplicationContext(),loggedInUserId));
     }
 
     private void logout() {

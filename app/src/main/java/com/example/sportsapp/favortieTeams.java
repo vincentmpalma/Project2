@@ -42,7 +42,7 @@ import java.util.List;
 
 public class favortieTeams extends AppCompatActivity {
 
-    private static final String MLB_ACTIVITY_USER_ID = "com.example.sportsapp.MAIN_ACTIVITY_USER_ID";
+    private static final String FAVORITE_TEAMS_ACTIVITY_USER_ID = "com.example.sportsapp.FAVORITE_TEAMS_ACTIVITY_USER_ID";
     static final String SHARED_PREFERENCE_USERID_KEY = "com.example.sportsapp.SHARED_PREFERENCE_USERID_KEY";
     static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.sportsapp.SAVED_INSTANCE_STATE_USERID_KEY";
     private static final int LOGGED_OUT = -1;
@@ -294,7 +294,7 @@ public class favortieTeams extends AppCompatActivity {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(favortieTeams.this);
         final AlertDialog alertDialog = alertBuilder.create();
 
-        alertDialog.setMessage("Logout?");
+        alertBuilder.setMessage("Logout?");
 
         alertBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
             @Override
@@ -309,15 +309,26 @@ public class favortieTeams extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
+        alertBuilder.setNeutralButton("Back", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                backup();
+            }
+        });
+
 
         alertBuilder.create().show();
+    }
+    private void backup() {
+        getIntent().putExtra(FAVORITE_TEAMS_ACTIVITY_USER_ID,loggedInUserId);
+        startActivity(MlbActivity.mlbIntentFactory(getApplicationContext(),loggedInUserId));
     }
 
     private void logout() {
 
         loggedInUserId = LOGGED_OUT;
         updateSharedPreference();
-        getIntent().putExtra(MLB_ACTIVITY_USER_ID, loggedInUserId);
+        getIntent().putExtra(FAVORITE_TEAMS_ACTIVITY_USER_ID, loggedInUserId);
 
         startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
     }
@@ -335,7 +346,7 @@ public class favortieTeams extends AppCompatActivity {
         }
 
         if (loggedInUserId == LOGGED_OUT) {
-            loggedInUserId = getIntent().getIntExtra(MLB_ACTIVITY_USER_ID, LOGGED_OUT);
+            loggedInUserId = getIntent().getIntExtra(FAVORITE_TEAMS_ACTIVITY_USER_ID, LOGGED_OUT);
         }
 
         if (loggedInUserId == LOGGED_OUT) {

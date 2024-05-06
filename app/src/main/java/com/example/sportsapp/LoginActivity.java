@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.guestTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = SearchActivity.searchIntentFactory(getApplicationContext());
+                Intent intent = MlbActivity.mlbIntentFactory(getApplicationContext(),1111);
                 startActivity(intent);
             }
         });
