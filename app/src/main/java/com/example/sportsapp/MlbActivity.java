@@ -80,6 +80,14 @@ public class MlbActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        binding.RegisterMlbButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = RegisterActivity.registerIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void loadData() {
@@ -223,13 +231,6 @@ public class MlbActivity extends AppCompatActivity {
                                 JSONObject situation = competition.getJSONObject("situation");
                                 if(situation.has("outs")){
                                     outs = situation.getInt("outs");
-                                   // TextView outsView = new TextView(getApplicationContext());
-                                   // outsView.setLayoutParams(textParams);
-                                    //outsView.setTextSize(15);
-                                    //outsView.setText("Outs: " + outs);
-                                    //binding.myLayout.addView(outsView);
-
-
                                 }
                             }
 
@@ -371,6 +372,7 @@ public class MlbActivity extends AppCompatActivity {
             if (user != null) {
                 invalidateOptionsMenu();
                 binding.backButton.setVisibility(View.INVISIBLE);
+                binding.RegisterMlbButton.setVisibility(View.INVISIBLE);
             }
             if(loggedInUserId==1111){
                 binding.favoriteATeamButton.setVisibility(View.INVISIBLE);

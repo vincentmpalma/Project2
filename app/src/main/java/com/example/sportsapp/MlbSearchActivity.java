@@ -91,7 +91,7 @@ public class MlbSearchActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 buttonParams.bottomMargin = 100;
                 for (MlbTeam team : mlbTeams) {
-                    //binding.textView.setText(binding.textView.getText().toString() + " " + team.getTeamName());
+
 
                     TextView nameTextView = new TextView(getApplicationContext());
                     nameTextView.setLayoutParams(textParams);
@@ -146,7 +146,6 @@ public class MlbSearchActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 buttonParams.bottomMargin = 100;
                 for (MlbTeam team : mlbTeams) {
-                    //binding.textView.setText(binding.textView.getText().toString() + " " + team.getTeamName());
 
                     TextView nameTextView = new TextView(getApplicationContext());
                     nameTextView.setLayoutParams(textParams);

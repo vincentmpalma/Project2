@@ -80,7 +80,7 @@ public class favortieTeams extends AppCompatActivity {
                 buttonParams.bottomMargin = 100;
                 String test = "";
                 for (MlbTeam team : mlbTeams) {
-                    //binding.textView.setText(binding.textView.getText().toString() + " " + team.getTeamName());
+
 
                     for (int i = 0; i < list.size(); i++) {
 
@@ -251,7 +251,7 @@ public class favortieTeams extends AppCompatActivity {
                         }
                     }
                 }
-                //binding.textView3.setText(test);
+
             }
         };
 
